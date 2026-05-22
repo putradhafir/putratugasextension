@@ -267,34 +267,56 @@
     </div>
 
     <div class="card">
-      <h2>2. CLASS DAN OBJECT</h2>
+      <h2>1.Builder Pattern </h2>
       <p>
-        Pada source code ini, class <b>Car</b> memiliki dua atribut yaitu model dan color.
-        Method <b>start()</b> dan <b>stop()</b> menggambarkan perilaku objek mobil.
+        Builder Pattern adalah design pattern creational yang memungkinkan pembuatan objek kompleks secara bertahap.
+        Pattern ini memisahkan proses konstruksi dari representasi akhir objek,
+        sehingga proses pembuatan yang sama bisa menghasilkan representasi objek yang berbeda.
       </p>
       <pre><code>
-class Car {
-  String? model;
-  String? color;
+// ==========================================
+// Nama  :  Putr Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
 
-  void start() {
-    print('Car started!');
+class Config {}
+
+class ConfigBuilder {
+
+  ConfigBuilder host(String h) {
+    print("Host : $h");
+    return this;
   }
 
-  void stop() {
-    print('Car stopped!');
+  ConfigBuilder port(int p) {
+    print("Port : $p");
+    return this;
   }
+
+  Config build() {
+    print("Config berhasil dibuat");
+    return Config();
+  }
+}
+
+void main() {
+
+  ConfigBuilder()
+      .host('localhost')
+      .port(8080)
+      .build();
 }
 </code></pre>
 
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/de50f1df1df31c2d8d40d9b9bbf9392d')">JALANKAN
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/ed61c2e921bc3923740e2d6d698a5c15')">JALANKAN
           KODE </button>
       </div>
     </div>
 
     <div class="card">
-      <h2>3. CONSTRUCTOR</h2>
+      <h2>2. CONSTRUCTOR</h2>
       <p>
         Constructor digunakan untuk memberikan nilai awal saat objek dibuat secara otomatis.
       </p>
