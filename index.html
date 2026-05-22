@@ -287,7 +287,9 @@ void main() {
 }
 </code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal(encodeURIComponent(`class Config {}
+      <button class="run-btn" onclick="openModal('https://dartpad.dev/embed-dart.html?theme=dark&run=true&code=class%20Config%20%7B%7D%0A%0Aclass%20ConfigBuilder%20%7B%0A%20%20ConfigBuilder%20host(String%20h)%20%7B%0A%20%20%20%20print(%22Host%20%3A%20%24h%22)%3B%0A%20%20%20%20return%20this%3B%0A%20%20%7D%0A%0A%20%20ConfigBuilder%20port(int%20p)%20%7B%0A%20%20%20%20print(%22Port%20%3A%20%24p%22)%3B%0A%20%20%20%20return%20this%3B%0A%20%20%7D%0A%0A%20%20Config%20build()%20%7B%0A%20%20%20%20print(%22Config%20berhasil%20dibuat%22)%3B%0A%20%20%20%20return%20Config()%3B%0A%20%20%7D%0A%7D%0A%0Avoid%20main()%20%7B%0A%20%20ConfigBuilder()%0A%20%20%20%20.host('localhost')%0A%20%20%20%20.port(8080)%0A%20%20%20%20.build()%3B%0A%7D')">
+  JALANKAN KODE
+</button>
 
 class ConfigBuilder {
   ConfigBuilder host(String h) {
