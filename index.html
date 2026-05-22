@@ -316,98 +316,245 @@ void main() {
     </div>
 
     <div class="card">
-      <h2>2. CONSTRUCTOR</h2>
+      <h2>2.Masalah Tanpa Extension Methods</h2>
       <p>
-        Constructor digunakan untuk memberikan nilai awal saat objek dibuat secara otomatis.
+       Extension Methods adalah fitur dalam bahasa pemrograman (seperti Dart, Kotlin, C#, Swift) yang memungkinkan kita menambahkan
+        fungsi baru ketipe data yang sudah ada,
+        tanpa harus mengubah kode asli dari tipe data tersebut.
       </p>
       <pre><code>
-class Car {
-  String? model;
-  String? color;
+// ==========================================
+// Nama  : Putra Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
 
-  Car(this.model, this.color);
+class StringUtils {
 
-  void start() {
-    print('Car started!');
+  static String capitalize(String text) {
+    if (text.isEmpty) return text;
+    return text[0].toUpperCase() + text.substring(1);
   }
+
+  static bool isEmail(String text) {
+    return text.contains('@');
+  }
+}
+
+void main() {
+
+  var name = 'john';
+
+  var capitalized = StringUtils.capitalize(name);
+  var isEmail = StringUtils.isEmail('test@mail.com');
+
+  print('Original name : $name');
+  print('Capitalized    : $capitalized');
+  print('Is Email       : $isEmail');
 }
 </code></pre>
 
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/de50f1df1df31c2d8d40d9b9bbf9392d')">JALANKAN
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/b8c33fb990d3a01fba6977ed032cc174')">JALANKAN
           KODE </button>
       </div>
     </div>
 
     <div class="card">
-      <h2>4. VALIDASI DATA</h2>
+      <h2>3.Solusi dengan Extension Methods</h2>
       <p>
-        Penerapan kontrol data agar sistem lebih aman dengan melakukan check pada saat inisialisasi.
+      Extension Methods adalah fitur yang memungkinkan kita menambahkan method baru ke tipe data yang sudah ada
+      tanpa harus mengubah kode aslinya.
+      ini adalah solusi elegan untuk masalah-masalah yang sebelumnya dihadapi.
       </p>
       <pre><code>
-class Mahasiswa {
-  String nama;
-  String nim;
-  double ipk;
+// ==========================================
+// Nama  : Putra Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
 
-  Mahasiswa(this.nama, this.nim, this.ipk) {
-    if (ipk < 0.0 || ipk > 4.0) {
-      throw ArgumentError('IPK harus 0.0 - 4.0');
+extension StringExtensions on String {
+
+  String capitalize() {
+    if (isEmpty) return this;
+    return this[0].toUpperCase() + substring(1);
+  }
+
+  bool get isEmail => contains('@');
+
+  String reverse() {
+    return split('').reversed.join();
+  }
+}
+
+void main() {
+
+  var name = 'john';
+
+  var capitalized = name.capitalize();
+  var isEmail = 'test@mail.com'.isEmail;
+  var reversed = 'hello'.reverse();
+
+  print('Original name : $name');
+  print('Capitalized    : $capitalized');
+  print('Is Email       : $isEmail');
+  print('Reverse hello  : $reversed');
+}
+</code></pre>
+
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/43c960d80a23f6101cc2322b3ff6323f')">JALANKAN
+          KODE </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>4. Sintaks Extension Methods</h2>
+      <p>
+Extension Methods memungkinkan Anda menambahkan fungsi baru ke tipe data yang sudah ada
+      </p>
+      <pre><code>
+// ==========================================
+// Nama  : Putra Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
+extension DateTimeExtensions on DateTime {
+
+  // Method
+  String toFormattedString() {
+    return '$day/$month/$year';
+  }
+
+  // Getter
+  bool get isToday {
+    var now = DateTime.now();
+
+    return year == now.year &&
+           month == now.month &&
+           day == now.day;
+  }
+
+  // Operator
+  DateTime operator +(Duration duration) {
+    return add(duration);
+  }
+}
+
+void main() {
+
+  DateTime today = DateTime.now();
+
+  print('Tanggal hari ini        : ${today.toFormattedString()}');
+  print('Apakah hari ini?        : ${today.isToday}');
+
+  DateTime nextDay = today + Duration(days: 1);
+
+  print('Tanggal setelah ditambah: ${nextDay.toFormattedString()}');
+}
+</code></pre>
+
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/ca7438a8bedd6a209dd90d4943a438be')">JALANKAN
+          KODE </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>6.Extension untuk Null Safety</h2>
+      <p>
+       Null Safety Extension adalah extension method yang dirancang khusus untuk menangani tipe data yang mungkin 
+       bernilai null (nullable types).
+       Extension ini membantu kita mengelola nilai null dengan aman tanpa harus menulis kode pengecekan if (value == null) berulang-ulang.
+        \\
+      </p>
+      <pre><code>
+// ==========================================
+// Nama  : Putra Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
+
+extension NullableStringExtensions on String? {
+
+  String orEmpty() => this ?? '';
+
+  bool get isNullOrEmpty => this == null || this!.isEmpty;
+
+  bool get isNotNullOrEmpty => !isNullOrEmpty;
+
+  String withDefault(String defaultValue) {
+    return this ?? defaultValue;
+  }
+}
+
+void main() {
+
+  String? name;
+
+  print('Hasil orEmpty()            : ${name.orEmpty()}');
+  print('Hasil isNullOrEmpty        : ${name.isNullOrEmpty}');
+  print('Hasil isNotNullOrEmpty     : ${name.isNotNullOrEmpty}');
+  print('Hasil withDefault("Guest") : ${name.withDefault('Guest')}');
+}
+</code></pre>
+
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/30d4c7c01a8828ef84d9eba3bf70edbe')">JALANKAN
+          KODE </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>7.Utilities untuk Dart Types - PRAKTEK 1</h2>
+      <p>
+      Membuat extension methods sebagai utilities untuk tipe data bawaan Dart (String, int, double, bool, List, Map)
+      agar kode lebih bersih, reusable, dan mudah digunakan.
+      </p>
+      <pre><code>
+// ==========================================
+// Nama  : Putra Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
+extension NumberExtensions on num {
+
+  // Format ke Rupiah
+  String toRupiah() {
+    return 'Rp${toStringAsFixed(0)}';
+  }
+
+  // Cek nilai dalam range
+  bool isBetween(num min, num max) {
+    return this >= min && this <= max;
+  }
+
+  // Pangkat
+  num power(int exponent) {
+
+    var result = this;
+
+    for (var i = 1; i < exponent; i++) {
+      result *= this;
     }
+
+    return result;
   }
 }
-</code></pre>
 
-      <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/1e5fd7dbdc40af36f08bc45e7644bbf2')">JALANKAN
-          KODE </button>
-      </div>
-    </div>
+void main() {
 
-    <div class="card">
-      <h2>5. ENCAPSULATION</h2>
-      <p>
-        Menyembunyikan detail implementasi internal menggunakan variabel private (underscore).
-      </p>
-      <pre><code>
-class Person {
-  String _name;
-  int age;
+  var price = 150000;
 
-  Person(this._name, this.age);
-
-  void setName(String name) { _name = name; }
-  String getName() { return _name; }
+  print('Harga dalam rupiah : ${price.toRupiah()}');
+  print('Apakah antara 1-10 : ${5.isBetween(1, 10)}');
+  print('Hasil 2 pangkat 3  : ${2.power(3)}');
 }
 </code></pre>
 
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/5c76a0ea275cc9c91951b69b6b961b2c')">JALANKAN
-          KODE </button>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>6. NAMED PARAMETER</h2>
-      <p>
-        Membuat inisialisasi objek lebih fleksibel dan mudah dibaca (clean code).
-      </p>
-      <pre><code>
-class Produk {
-  final String id;
-  final String nama;
-  final double harga;
-
-  Produk({
-    required this.id,
-    required this.nama,
-    required this.harga,
-  });
-}
-</code></pre>
-
-      <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/ee52930ee598efc6feab60987df50b0a')">JALANKAN
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/1bb1b0e8bc72ab446e9cc1b6ce19dec8')">JALANKAN
           KODE </button>
       </div>
     </div>
