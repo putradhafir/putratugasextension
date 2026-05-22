@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Polimorfisme dan Abstraksi</title>
+  <title>Builder Pattern - DartPad Demo</title>
 
   <style>
     /* ===== TEMA NYAMAN DILIHAT: SOFT NEUTRAL + KONTRAST TINGGI ===== */
@@ -239,8 +239,8 @@
     .modal-content {
       background: #ffffff;
       width: 90%;
-      max-width: 1000px;
-      margin: 5% auto;
+      max-width: 1100px;
+      margin: 3% auto;
       border-radius: 40px;
       border: 1px solid #cde3ec;
       padding: 20px;
@@ -252,7 +252,7 @@
       width: 100%;
       height: 550px;
       border-radius: 28px;
-      border: none;
+      border: 1px solid #d4e0e8;
     }
 
     .close {
@@ -262,6 +262,7 @@
       font-weight: 500;
       cursor: pointer;
       transition: 0.2s;
+      margin-top: -8px;
     }
 
     .close:hover {
@@ -328,6 +329,16 @@
       h2 {
         font-size: 1.5rem;
       }
+      
+      .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 15px;
+      }
+      
+      .modal iframe {
+        height: 450px;
+      }
     }
   </style>
 </head>
@@ -355,7 +366,7 @@ sehingga proses pembuatan yang sama bisa menghasilkan representasi objek yang be
 
       <pre>
 // ==========================================
-// Nama  :  Putr Dhafir Nashrullah
+// Nama  :  Putra Dhafir Nashrullah
 // NIM   : 251410009
 // Kelas : SI2A
 // ==========================================
@@ -390,8 +401,44 @@ void main() {
         
   </pre>
 
-      <button class="btn" onclick="openModal('ed61c2e921bc3923740e2d6d698a5c15')">
+      <button class="btn" onclick="openDartPad()">
         ▶ RUN CODE
       </button>
     </div>
+    
+    <div class="card">
+      <h3>📺 Output Program (DartPad)</h3>
+      <p>Klik tombol <strong>RUN</strong> di DartPad di bawah untuk melihat hasil eksekusi:</p>
+      
+      <!-- DARTPAD IFRAME LANGSUNG DI HALAMAN -->
+      <iframe 
+        src="https://dartpad.dev/embed-dart.html?theme=light&run=true&code=class%20Config%20{}%0A%0Aclass%20ConfigBuilder%20{%0A%20%20ConfigBuilder%20host(String%20h)%20{%0A%20%20%20%20print(%22Host%20:%20$h%22);%0A%20%20%20%20return%20this;%0A%20%20}%0A%0A%20%20ConfigBuilder%20port(int%20p)%20{%0A%20%20%20%20print(%22Port%20:%20$p%22);%0A%20%20%20%20return%20this;%0A%20%20}%0A%0A%20%20Config%20build()%20{%0A%20%20%20%20print(%22Config%20berhasil%20dibuat%22);%0A%20%20%20%20return%20Config();%0A%20%20}%0A}%0A%0Avoid%20main()%20{%0A%20%20ConfigBuilder()%0A%20%20%20%20.host('localhost')%0A%20%20%20%20.port(8080)%0A%20%20%20%20.build();%0A}" 
+        width="100%" 
+        height="500" 
+        style="border-radius: 16px; border: 1px solid #cbdde6; margin-top: 16px;">
+      </iframe>
+    </div>
+  </div>
+  
+  <footer>
+    <p>© 2025 - Tugas Pemrograman Berorientasi Objek | Builder Pattern Demonstration</p>
+  </footer>
 
+  <script>
+    // Fungsi untuk scroll ke DartPad (opsional)
+    function openDartPad() {
+      // Scroll ke iframe DartPad
+      const iframe = document.querySelector('.card iframe');
+      if (iframe) {
+        iframe.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Beri efek highlight sebentar
+        iframe.style.border = '2px solid #48b5d0';
+        setTimeout(() => {
+          iframe.style.border = '1px solid #cbdde6';
+        }, 1500);
+      }
+    }
+  </script>
+</body>
+
+</html>
