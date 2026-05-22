@@ -287,21 +287,19 @@ void main() {
 }
 </code></pre>
       <div class="run-btn-container">
-      <button class="run-btn" onclick="openModal('https://dartpad.dev/embed-dart.html?theme=dark&run=true&code=class%20Config%20%7B%7D%0A%0Aclass%20ConfigBuilder%20%7B%0A%20%20ConfigBuilder%20host(String%20h)%20%7B%0A%20%20%20%20print(%22Host%20%3A%20%24h%22)%3B%0A%20%20%20%20return%20this%3B%0A%20%20%7D%0A%0A%20%20ConfigBuilder%20port(int%20p)%20%7B%0A%20%20%20%20print(%22Port%20%3A%20%24p%22)%3B%0A%20%20%20%20return%20this%3B%0A%20%20%7D%0A%0A%20%20Config%20build()%20%7B%0A%20%20%20%20print(%22Config%20berhasil%20dibuat%22)%3B%0A%20%20%20%20return%20Config()%3B%0A%20%20%7D%0A%7D%0A%0Avoid%20main()%20%7B%0A%20%20ConfigBuilder()%0A%20%20%20%20.host('localhost')%0A%20%20%20%20.port(8080)%0A%20%20%20%20.build()%3B%0A%7D')">
-  JALANKAN KODE
-</button>
+        <button class="run-btn" onclick="openDartPad(`class Config {}
 
 class ConfigBuilder {
   ConfigBuilder host(String h) {
-    print("Host : \$h");
+    print(\"Host : \$h\");
     return this;
   }
   ConfigBuilder port(int p) {
-    print("Port : \$p");
+    print(\"Port : \$p\");
     return this;
   }
   Config build() {
-    print("Config berhasil dibuat");
+    print(\"Config berhasil dibuat\");
     return Config();
   }
 }
@@ -311,7 +309,9 @@ void main() {
       .host('localhost')
       .port(8080)
       .build();
-}`))">▶ JALANKAN KODE</button>
+}`)">
+          ▶ JALANKAN KODE
+        </button>
       </div>
     </div>
 
@@ -349,7 +349,7 @@ void main() {
 }
 </code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal(encodeURIComponent(`class StringUtils {
+        <button class="run-btn" onclick="openDartPad(`class StringUtils {
   static String capitalize(String text) {
     if (text.isEmpty) return text;
     return text[0].toUpperCase() + text.substring(1);
@@ -365,7 +365,9 @@ void main() {
   print('Original name : \$name');
   print('Capitalized    : \$capitalized');
   print('Is Email       : \$isEmail');
-}`))">▶ JALANKAN KODE</button>
+}`)">
+          ▶ JALANKAN KODE
+        </button>
       </div>
     </div>
 
@@ -406,7 +408,7 @@ void main() {
 }
 </code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal(encodeURIComponent(`extension StringExtensions on String {
+        <button class="run-btn" onclick="openDartPad(`extension StringExtensions on String {
   String capitalize() {
     if (isEmpty) return this;
     return this[0].toUpperCase() + substring(1);
@@ -425,7 +427,9 @@ void main() {
   print('Capitalized    : \$capitalized');
   print('Is Email       : \$isEmail');
   print('Reverse hello  : \$reversed');
-}`))">▶ JALANKAN KODE</button>
+}`)">
+          ▶ JALANKAN KODE
+        </button>
       </div>
     </div>
 
@@ -462,7 +466,7 @@ void main() {
 }
 </code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal(encodeURIComponent(`extension DateTimeExtensions on DateTime {
+        <button class="run-btn" onclick="openDartPad(`extension DateTimeExtensions on DateTime {
   String toFormattedString() {
     return '\$day/\$month/\$year';
   }
@@ -480,7 +484,9 @@ void main() {
   print('Apakah hari ini?        : \${today.isToday}');
   DateTime nextDay = today + Duration(days: 1);
   print('Tanggal setelah ditambah: \${nextDay.toFormattedString()}');
-}`))">▶ JALANKAN KODE</button>
+}`)">
+          ▶ JALANKAN KODE
+        </button>
       </div>
     </div>
 
@@ -516,7 +522,7 @@ void main() {
 }
 </code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal(encodeURIComponent(`extension NullableStringExtensions on String? {
+        <button class="run-btn" onclick="openDartPad(`extension NullableStringExtensions on String? {
   String orEmpty() => this ?? '';
   bool get isNullOrEmpty => this == null || this!.isEmpty;
   bool get isNotNullOrEmpty => !isNullOrEmpty;
@@ -530,7 +536,9 @@ void main() {
   print('Hasil isNullOrEmpty        : \${name.isNullOrEmpty}');
   print('Hasil isNotNullOrEmpty     : \${name.isNotNullOrEmpty}');
   print('Hasil withDefault("Guest") : \${name.withDefault('Guest')}');
-}`))">▶ JALANKAN KODE</button>
+}`)">
+          ▶ JALANKAN KODE
+        </button>
       </div>
     </div>
 
@@ -572,7 +580,7 @@ void main() {
 }
 </code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal(encodeURIComponent(`extension NumberExtensions on num {
+        <button class="run-btn" onclick="openDartPad(`extension NumberExtensions on num {
   String toRupiah() {
     return 'Rp\${toStringAsFixed(0)}';
   }
@@ -592,7 +600,9 @@ void main() {
   print('Harga dalam rupiah : \${price.toRupiah()}');
   print('Apakah antara 1-10 : \${5.isBetween(1, 10)}');
   print('Hasil 2 pangkat 3  : \${2.power(3)}');
-}`))">▶ JALANKAN KODE</button>
+}`)">
+          ▶ JALANKAN KODE
+        </button>
       </div>
     </div>
 
@@ -640,7 +650,7 @@ void main() {
 }
 </code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal(encodeURIComponent(`extension ListExtensions<T> on List<T> {
+        <button class="run-btn" onclick="openDartPad(`extension ListExtensions<T> on List<T> {
   T? getOrNull(int index) {
     if (index < 0 || index >= length) return null;
     return this[index];
@@ -666,7 +676,9 @@ void main() {
   var numbers = [1, 2, 3, 4, 5, 6, 7];
   print('Data chunk : \${numbers.chunk(3)}');
   print('Data distinct : \${[1, 2, 2, 3, 3].distinct()}');
-}`))">▶ JALANKAN KODE</button>
+}`)">
+          ▶ JALANKAN KODE
+        </button>
       </div>
     </div>
 
@@ -685,9 +697,13 @@ void main() {
   </footer>
 
   <script>
-    // FUNGSI MODAL - Menggunakan DartPad Embed dengan parameter code
-    function openModal(encodedCode) {
+    // FUNGSI MEMBUAT DARTPAD DARI KODE DART
+    function openDartPad(code) {
+      // Encode kode Dart ke format URL
+      const encodedCode = encodeURIComponent(code);
       const dartUrl = `https://dartpad.dev/embed-dart.html?theme=dark&run=true&code=${encodedCode}`;
+      
+      // Tampilkan modal dan set iframe
       document.getElementById("codeModal").style.display = "block";
       document.getElementById("dartFrame").src = dartUrl;
       document.body.style.overflow = "hidden";
