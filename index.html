@@ -1,1 +1,397 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polimorfisme dan Abstraksi</title>
+
+  <style>
+    /* ===== TEMA NYAMAN DILIHAT: SOFT NEUTRAL + KONTRAST TINGGI ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f4f7fc;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1a2c3e;
+      line-height: 1.65;
+      padding: 40px 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header / Title */
+    h1 {
+      text-align: center;
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      color: #0b3b4f;
+    }
+
+    /* subheading untuk NIM dll */
+    .subhead {
+      text-align: center;
+      font-size: 1rem;
+      color: #2c5a6e;
+      margin-bottom: 32px;
+      border-bottom: 2px solid #cbdde6;
+      display: inline-block;
+      width: auto;
+      margin-left: auto;
+      margin-right: auto;
+      padding-bottom: 6px;
+    }
+
+    /* info bar */
+    .info-bar {
+      background: #ffffffcc;
+      backdrop-filter: blur(4px);
+      border-radius: 28px;
+      padding: 12px 20px;
+      margin-bottom: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      font-weight: 500;
+      color: #0f3b4a;
+      border: 1px solid #dce7ef;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .info-bar span {
+      background: #eef3f9;
+      padding: 4px 14px;
+      border-radius: 40px;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin: 48px 0 20px 0;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: #155f73;
+      border-left: 5px solid #48b5d0;
+      padding-left: 18px;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #1e6f8c;
+    }
+
+    /* Card bersih + bayangan halus */
+    .card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 28px 30px;
+      margin-bottom: 28px;
+      transition: all 0.2s ease;
+      border: 1px solid #e2edf2;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .card:hover {
+      border-color: #bfdae6;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Pre / code blocks */
+    pre {
+      background: #f0f4f8;
+      border: 1px solid #d4e0e8;
+      border-radius: 20px;
+      padding: 20px;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #1e2f3c;
+      margin: 20px 0;
+      box-shadow: inset 0 1px 2px #00000008, 0 2px 4px #00000004;
+    }
+
+    code {
+      background: #e6edf2;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+      color: #136b7c;
+    }
+
+    /* Tombol bersih */
+    .btn {
+      background: #ffffff;
+      border: 1px solid #b9d4e2;
+      color: #1f6e88;
+      padding: 8px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 12px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    .btn:hover {
+      background: #e6f4fa;
+      border-color: #8bc1d4;
+      color: #0a4c60;
+      transform: translateY(-1px);
+    }
+
+    /* Tabel perbandingan */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #f9fdfe;
+      border-radius: 20px;
+      overflow: hidden;
+      font-family: 'Inter', monospace;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .comparison-table th {
+      background: #e1f0f5;
+      color: #144e60;
+      font-weight: 700;
+      padding: 14px;
+      border-bottom: 2px solid #c2dae6;
+    }
+
+    .comparison-table td {
+      padding: 12px;
+      border-bottom: 1px solid #e2edf2;
+      color: #1a3a48;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .badge-is-a {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    .badge-can-do {
+      background: #fef9c3;
+      color: #854d0e;
+      border: 1px solid #fde047;
+    }
+
+    .check {
+      color: #15803d;
+      font-weight: bold;
+    }
+
+    .cross {
+      color: #b91c1c;
+      font-weight: bold;
+    }
+
+    /* footer */
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      padding: 24px 20px;
+      background: #eef3f8;
+      border-radius: 40px;
+      font-size: 14px;
+      color: #2c6072;
+      border: 1px solid #d4e2ea;
+    }
+
+    /* Modal elegan */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(6px);
+    }
+
+    .modal-content {
+      background: #ffffff;
+      width: 90%;
+      max-width: 1000px;
+      margin: 5% auto;
+      border-radius: 40px;
+      border: 1px solid #cde3ec;
+      padding: 20px;
+      animation: fadeInUp 0.25s ease;
+      box-shadow: 0 30px 40px -20px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal iframe {
+      width: 100%;
+      height: 550px;
+      border-radius: 28px;
+      border: none;
+    }
+
+    .close {
+      color: #5f8da0;
+      float: right;
+      font-size: 32px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .close:hover {
+      color: #1b6c85;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    hr {
+      margin: 40px 0;
+      border: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #bfdbe8, #8dbdd0, #bfdbe8, transparent);
+    }
+
+    ul,
+    ol {
+      padding-left: 1.6rem;
+      margin: 12px 0;
+    }
+
+    li {
+      margin: 6px 0;
+      color: #1a3a48;
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: #1e3a4a;
+    }
+
+    .identity {
+      background: #ffffffcc;
+      border-left: 4px solid #48b5d0;
+      padding: 10px 18px;
+      border-radius: 18px;
+      margin-bottom: 24px;
+    }
+
+    /* responsive */
+    @media (max-width: 680px) {
+      body {
+        padding: 20px 16px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Extension serta Methods</h1>
+    <div style="text-align: center; margin-bottom: 8px;">
+      <div class="subhead">Tugas - Pemrograman Berorientasi Objek</div>
+    </div>
+    <div class="info-bar">
+      <span>📌 Putra Dhafir Nashrullah</span>
+      <span>🆔 251410009</span>
+      <span>📚 Kelas SI2A</span>
+    </div>
+
+    <div class="card">
+      <ul>
+        <li>1. Builder Pattern adalah design pattern creational yang memungkinkan pembuatan objek kompleks secara bertahap.
+Pattern ini memisahkan proses konstruksi dari representasi akhir objek, 
+sehingga proses pembuatan yang sama bisa menghasilkan representasi objek yang berbeda.</li>
+      </ul>
+
+      <pre>
+// ==========================================
+// Nama  :  Putr Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
+
+class Config {}
+
+class ConfigBuilder {
+
+  ConfigBuilder host(String h) {
+    print("Host : $h");
+    return this;
+  }
+
+  ConfigBuilder port(int p) {
+    print("Port : $p");
+    return this;
+  }
+
+  Config build() {
+    print("Config berhasil dibuat");
+    return Config();
+  }
+}
+
+void main() {
+
+  ConfigBuilder()
+      .host('localhost')
+      .port(8080)
+      .build();
+}
+        
+  </pre>
+
+      <button class="btn" onclick="openModal('ed61c2e921bc3923740e2d6d698a5c15')">
+        ▶ RUN CODE
+      </button>
+    </div>
 
