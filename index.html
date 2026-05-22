@@ -247,64 +247,235 @@
 
 <body>
 
+  <header>
+    <h1>Extension serta Methods</h1>
+    <p>PUTRA DHAFIR NASHRULLAH | NIM: 251410009</p>
+  </header>
+
   <div class="container">
 
-    <h1>Extension serta Methods</h1>
-    <div style="text-align: center; margin-bottom: 8px;">
-      <div class="subhead">Tugas - Pemrograman Berorientasi Objek</div>
-    </div>
-    <div class="info-bar">
-      <span>📌 Putra Dhafir Nashrullah</span>
-      <span>🆔 251410009</span>
-      <span>📚 Kelas SI2A</span>
+    <div class="card">
+      <h2>1. Builder Pattern</h2>
+
+      <p>
+        <strong>Builder Pattern adalah design pattern creational yang memungkinkan pembuatan objek kompleks secara bertahap.
+  Pattern ini memisahkan proses konstruksi dari representasi akhir objek,
+  sehingga proses pembuatan yang sama bisa menghasilkan representasi objek yang berbeda.
+      </p>
+    </li>
+      </ul>
     </div>
 
     <div class="card">
-      <ul>
-        <li>1. Builder Pattern adalah design pattern creational yang memungkinkan pembuatan objek kompleks secara bertahap.
-Pattern ini memisahkan proses konstruksi dari representasi akhir objek, 
-sehingga proses pembuatan yang sama bisa menghasilkan representasi objek yang berbeda.</li>
-      </ul>
+      <h2>2. CLASS DAN OBJECT</h2>
+      <p>
+        Pada source code ini, class <b>Car</b> memiliki dua atribut yaitu model dan color.
+        Method <b>start()</b> dan <b>stop()</b> menggambarkan perilaku objek mobil.
+      </p>
+      <pre><code>
+class Car {
+  String? model;
+  String? color;
 
-      <pre>
-// ==========================================
-// Nama  :  Putr Dhafir Nashrullah
-// NIM   : 251410009
-// Kelas : SI2A
-// ==========================================
-
-class Config {}
-
-class ConfigBuilder {
-
-  ConfigBuilder host(String h) {
-    print("Host : $h");
-    return this;
+  void start() {
+    print('Car started!');
   }
 
-  ConfigBuilder port(int p) {
-    print("Port : $p");
-    return this;
-  }
-
-  Config build() {
-    print("Config berhasil dibuat");
-    return Config();
+  void stop() {
+    print('Car stopped!');
   }
 }
-
-void main() {
-
-  ConfigBuilder()
-      .host('localhost')
-      .port(8080)
-      .build();
-}
-        
 </code></pre>
 
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/ed61c2e921bc3923740e2d6d698a5c15')">JALANKAN
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/de50f1df1df31c2d8d40d9b9bbf9392d')">JALANKAN
           KODE </button>
       </div>
     </div>
+
+    <div class="card">
+      <h2>3. CONSTRUCTOR</h2>
+      <p>
+        Constructor digunakan untuk memberikan nilai awal saat objek dibuat secara otomatis.
+      </p>
+      <pre><code>
+class Car {
+  String? model;
+  String? color;
+
+  Car(this.model, this.color);
+
+  void start() {
+    print('Car started!');
+  }
+}
+</code></pre>
+
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/de50f1df1df31c2d8d40d9b9bbf9392d')">JALANKAN
+          KODE </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>4. VALIDASI DATA</h2>
+      <p>
+        Penerapan kontrol data agar sistem lebih aman dengan melakukan check pada saat inisialisasi.
+      </p>
+      <pre><code>
+class Mahasiswa {
+  String nama;
+  String nim;
+  double ipk;
+
+  Mahasiswa(this.nama, this.nim, this.ipk) {
+    if (ipk < 0.0 || ipk > 4.0) {
+      throw ArgumentError('IPK harus 0.0 - 4.0');
+    }
+  }
+}
+</code></pre>
+
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/1e5fd7dbdc40af36f08bc45e7644bbf2')">JALANKAN
+          KODE </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>5. ENCAPSULATION</h2>
+      <p>
+        Menyembunyikan detail implementasi internal menggunakan variabel private (underscore).
+      </p>
+      <pre><code>
+class Person {
+  String _name;
+  int age;
+
+  Person(this._name, this.age);
+
+  void setName(String name) { _name = name; }
+  String getName() { return _name; }
+}
+</code></pre>
+
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/5c76a0ea275cc9c91951b69b6b961b2c')">JALANKAN
+          KODE </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>6. NAMED PARAMETER</h2>
+      <p>
+        Membuat inisialisasi objek lebih fleksibel dan mudah dibaca (clean code).
+      </p>
+      <pre><code>
+class Produk {
+  final String id;
+  final String nama;
+  final double harga;
+
+  Produk({
+    required this.id,
+    required this.nama,
+    required this.harga,
+  });
+}
+</code></pre>
+
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/ee52930ee598efc6feab60987df50b0a')">JALANKAN
+          KODE </button>
+      </div>
+    </div>
+
+    <div class="forum-container">
+      <h2>FORUM KOMENTAR</h2>
+      <form id="commentForm">
+        <input type="text" id="name" placeholder="Nama..." required>
+        <textarea id="comment" placeholder="Tulis komentar..." required></textarea>
+        <button type="submit">KIRIM KOMENTAR</button>
+      </form>
+      <div id="comment-list"></div>
+    </div>
+
+    <div class="card">
+      <h2>8. TUGAS CLASS SERIGALA</h2>
+      <p> Class Hewan digunakan untuk merepresentasikan objek hewan dalam program (BONUS)
+
+ <pre><code>
+class Hewan {
+  String nama;
+  Hewan(this.nama);
+  void bersuara() {
+    print('$nama Mengeluarkan suara...');
+  }
+}
+void main() {
+  var myPet = Hewan('Serigala');
+  print("Nama Hewan: ${myPet.nama}");
+  myPet.bersuara();
+}
+</code></pre>
+      </p>
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/7d8a37ce85ccd191a81c7729626e49c7')"> JALANKAN KODE
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- --- MODAL STRUCTURE --- -->
+  <div id="codeModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <iframe id="dartFrame" src=""></iframe>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 - PUTRA DHAFIR NASHRULLAH
+  </footer>
+
+  <script>
+    // FUNGSI MODAL
+    function openModal(url) {
+      document.getElementById("codeModal").style.display = "block";
+      document.getElementById("dartFrame").src = url;
+      document.body.style.overflow = "hidden"; // Disable scroll background
+    }
+
+    function closeModal() {
+      document.getElementById("codeModal").style.display = "none";
+      document.getElementById("dartFrame").src = "";
+      document.body.style.overflow = "auto";
+    }
+
+    // Close modal if user clicks outside of it
+    window.onclick = function (event) {
+      if (event.target == document.getElementById("codeModal")) {
+        closeModal();
+      }
+    }
+
+    // FUNGSI KOMENTAR
+    document.getElementById("commentForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      var name = document.getElementById("name").value;
+      var comment = document.getElementById("comment").value;
+
+      var commentBox = document.createElement("div");
+      commentBox.classList.add("comment-box");
+      commentBox.innerHTML = "<strong>" + name + "</strong><p>" + comment + "</p>";
+
+      document.getElementById("comment-list").prepend(commentBox);
+
+      document.getElementById("name").value = "";
+      document.getElementById("comment").value = "";
+    });
+  </script>
+</body>
+
+</html>
