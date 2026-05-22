@@ -559,37 +559,75 @@ void main() {
       </div>
     </div>
 
-    <div class="forum-container">
-      <h2>FORUM KOMENTAR</h2>
-      <form id="commentForm">
-        <input type="text" id="name" placeholder="Nama..." required>
-        <textarea id="comment" placeholder="Tulis komentar..." required></textarea>
-        <button type="submit">KIRIM KOMENTAR</button>
-      </form>
-      <div id="comment-list"></div>
-    </div>
-
+    
     <div class="card">
-      <h2>8. TUGAS CLASS SERIGALA</h2>
-      <p> Class Hewan digunakan untuk merepresentasikan objek hewan dalam program (BONUS)
+      <h2>8.Generic Extensions</h2>
+      <p> Generic Extensions adalah fitur yang memungkinkan kita membuat extension method yang bisa bekerja pada berbagai 
+        tipe data sekaligus,
+        tanpa harus menulis ulang kode untuk setiap tipe.
 
  <pre><code>
-class Hewan {
-  String nama;
-  Hewan(this.nama);
-  void bersuara() {
-    print('$nama Mengeluarkan suara...');
+// ==========================================
+// Nama  : Putra Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
+extension ListExtensions on List {
+
+  // Mengambil index dengan aman
+  T? getOrNull(int index) {
+    if (index < 0 || index >= length) {
+      return null;
+    }
+
+    return this[index];
+  }
+
+  // Membagi list menjadi beberapa bagian
+  List> chunk(int size) {
+
+    var chunks = >[];
+
+    for (var i = 0; i < length; i += size) {
+
+      chunks.add(
+        sublist(i, i + size > length ? length : i + size)
+      );
+    }
+
+    return chunks;
+  }
+
+  // Menghapus data duplikat
+  List distinct() {
+
+    var result = [];
+
+    for (var item in this) {
+
+      if (!result.contains(item)) {
+        result.add(item);
+      }
+    }
+
+    return result;
   }
 }
+
 void main() {
-  var myPet = Hewan('Serigala');
-  print("Nama Hewan: ${myPet.nama}");
-  myPet.bersuara();
+
+  var numbers = [1, 2, 3, 4, 5, 6, 7];
+
+  print('Data chunk : ${numbers.chunk(3)}');
+
+  print(
+    'Data distinct : ${[1, 2, 2, 3, 3].distinct()}'
+  );
 }
 </code></pre>
       </p>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/1bb1b0e8bc72ab446e9cc1b6ce19dec8')"> JALANKAN KODE
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/87d44db88abf4f0f3be564810236b5ce')"> JALANKAN KODE
         </button>
       </div>
     </div>
