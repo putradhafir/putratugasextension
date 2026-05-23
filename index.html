@@ -10,12 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       background-color: #0a1f1a;
@@ -25,7 +19,7 @@
       overflow-x: hidden;
     }
 
-    /* EFEK KETUPAT BACKGROUND */
+    /* --- EFEK KETUPAT BACKGROUND --- */
     body::before {
       content: '';
       position: fixed;
@@ -53,12 +47,12 @@
     }
 
     header h1 {
-      font-size: 28px;
+      font-size: 14px;
       line-height: 1.6;
     }
 
     header p {
-      font-size: 16px;
+      font-size: 10px;
       margin-top: 10px;
     }
 
@@ -70,45 +64,47 @@
 
     .card {
       background: #0d2b22;
-      padding: 25px;
+      padding: 20px;
       margin-bottom: 40px;
       border: 4px solid #d4af37;
       box-shadow: 8px 8px 0px #1a5c3a;
-      border-radius: 8px;
     }
 
     h2 {
-      font-size: 24px;
+      font-size: 12px;
       color: #ffd700;
       margin-bottom: 20px;
-      border-left: 6px solid #d4af37;
-      padding-left: 15px;
     }
 
     p,
     li {
-      font-size: 16px;
+      font-size: 10px;
       line-height: 1.8;
     }
 
     ul {
       padding-left: 20px;
-      margin: 10px 0;
     }
 
     pre {
       background: #051410;
       color: #90ee90;
       padding: 15px;
-      font-size: 13px;
+      font-size: 9px;
       overflow-x: auto;
-      border: 2px solid #d4af37;
-      border-radius: 8px;
-      margin: 15px 0;
+      border: 3px solid #d4af37;
     }
 
-    code {
-      font-family: 'Courier New', monospace;
+    .dartpad-iframe {
+      display: none;
+      margin-top: 20px;
+      border: 4px solid #ffd700;
+      width: 100%;
+      height: 500px;
+    }
+
+    .dartpad-iframe.show {
+      display: block;
     }
 
     .run-btn-container {
@@ -120,16 +116,14 @@
       background-color: #1a5c3a;
       color: #d4af37;
       border: 4px solid #d4af37;
-      padding: 12px 25px;
+      padding: 15px 20px;
       font-family: 'Cairo', sans-serif;
-      font-size: 16px;
-      font-weight: bold;
+      font-size: 10px;
       text-decoration: none;
       cursor: pointer;
       box-shadow: 6px 6px 0px #051410;
       display: inline-block;
       transition: transform 0.1s, box-shadow 0.1s;
-      border-radius: 8px;
     }
 
     .run-btn:hover {
@@ -142,7 +136,58 @@
       box-shadow: 0px 0px 0px #051410;
     }
 
-    /* MODAL POPUP STYLE */
+    /* --- STYLE FORUM KOMENTAR --- */
+    .forum-container {
+      background: #0d2b22;
+      padding: 20px;
+      margin-bottom: 40px;
+      border: 4px solid #d4af37;
+      box-shadow: 8px 8px 0px #1a5c3a;
+    }
+
+    .forum-container h2 {
+      font-size: 12px;
+      color: #ffd700;
+      margin-bottom: 20px;
+    }
+
+    .forum-container input,
+    .forum-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 8px;
+      background: #051410;
+      color: #d4af37;
+      border: 3px solid #d4af37;
+    }
+
+    .forum-container button {
+      background: #1a5c3a;
+      color: #d4af37;
+      padding: 10px;
+      border: 3px solid #d4af37;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      font-size: 8px;
+    }
+
+    .forum-container button:hover {
+      background: #2a7a4a;
+    }
+
+    #comment-list {
+      margin-top: 20px;
+    }
+
+    .comment-box {
+      margin-top: 15px;
+      border-top: 2px dashed #d4af37;
+      padding-top: 10px;
+    }
+
+    /* --- MODAL POPUP STYLE --- */
     .modal {
       display: none;
       position: fixed;
@@ -151,7 +196,7 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.95);
+      background: rgba(0, 0, 0, 0.9);
       backdrop-filter: blur(8px);
     }
 
@@ -161,7 +206,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       width: 90%;
-      height: 85%;
+      height: 80%;
       background: #0d2b22;
       border: 4px solid #d4af37;
       border-radius: 15px;
@@ -184,47 +229,18 @@
       cursor: pointer;
       z-index: 1001;
       font-weight: 900;
-      background: transparent;
-      width: 40px;
-      height: 40px;
-      text-align: center;
-      line-height: 35px;
-      border-radius: 50%;
     }
 
     .close-modal:hover {
       color: #ffd700;
-      background: rgba(212, 175, 55, 0.2);
     }
 
     footer {
       background: #1a5c3a;
       text-align: center;
       padding: 20px;
-      font-size: 14px;
+      font-size: 10px;
       border-top: 6px solid #d4af37;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 10px;
-      }
-      .card {
-        padding: 15px;
-      }
-      h2 {
-        font-size: 20px;
-      }
-      p, li {
-        font-size: 14px;
-      }
-      pre {
-        font-size: 11px;
-      }
-      .run-btn {
-        font-size: 14px;
-        padding: 10px 20px;
-      }
     }
   </style>
 </head>
@@ -238,22 +254,28 @@
 
   <div class="container">
 
-    <!-- ==================== CARD 1: PENJELASAN ==================== -->
     <div class="card">
-      <h2>📌 Builder Pattern</h2>
+      <h2>1. Builder Pattern</h2>
+
       <p>
-        <strong>Builder Pattern</strong> adalah design pattern creational yang memungkinkan pembuatan objek kompleks secara bertahap.
+        <strong>Builder Pattern adalah design pattern creational yang memungkinkan pembuatan objek kompleks secara bertahap.
+  Pattern ini memisahkan proses konstruksi dari representasi akhir objek,
+  sehingga proses pembuatan yang sama bisa menghasilkan representasi objek yang berbeda.
+      </p>
+    </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>1.Builder Pattern </h2>
+      <p>
+        Builder Pattern adalah design pattern creational yang memungkinkan pembuatan objek kompleks secara bertahap.
         Pattern ini memisahkan proses konstruksi dari representasi akhir objek,
         sehingga proses pembuatan yang sama bisa menghasilkan representasi objek yang berbeda.
       </p>
-    </div>
-
-    <!-- ==================== CARD 2: BUILDER PATTERN ==================== -->
-    <div class="card">
-      <h2>1. Builder Pattern - Implementasi</h2>
       <pre><code>
 // ==========================================
-// Nama  : Putra Dhafir Nashrullah
+// Nama  :  Putr Dhafir Nashrullah
 // NIM   : 251410009
 // Kelas : SI2A
 // ==========================================
@@ -286,41 +308,19 @@ void main() {
       .build();
 }
 </code></pre>
+
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openDartPad(`class Config {}
-
-class ConfigBuilder {
-  ConfigBuilder host(String h) {
-    print(\"Host : \$h\");
-    return this;
-  }
-  ConfigBuilder port(int p) {
-    print(\"Port : \$p\");
-    return this;
-  }
-  Config build() {
-    print(\"Config berhasil dibuat\");
-    return Config();
-  }
-}
-
-void main() {
-  ConfigBuilder()
-      .host('localhost')
-      .port(8080)
-      .build();
-}`)">
-          ▶ JALANKAN KODE
-        </button>
+        <button class="run-btn" onclick="openModal("https://dartpad.dev/ed61c2e921bc3923740e2d6d698a5c15")">JALANKAN
+          KODE </button>
       </div>
     </div>
 
-    <!-- ==================== CARD 3: MASALAH TANPA EXTENSION ==================== -->
     <div class="card">
-      <h2>2. Masalah Tanpa Extension Methods</h2>
+      <h2>2.Masalah Tanpa Extension Methods</h2>
       <p>
-        Extension Methods adalah fitur dalam bahasa pemrograman (seperti Dart, Kotlin, C#, Swift) yang memungkinkan kita menambahkan
-        fungsi baru ke tipe data yang sudah ada, tanpa harus mengubah kode asli dari tipe data tersebut.
+       Extension Methods adalah fitur dalam bahasa pemrograman (seperti Dart, Kotlin, C#, Swift) yang memungkinkan kita menambahkan
+        fungsi baru ketipe data yang sudah ada,
+        tanpa harus mengubah kode asli dari tipe data tersebut.
       </p>
       <pre><code>
 // ==========================================
@@ -330,53 +330,42 @@ void main() {
 // ==========================================
 
 class StringUtils {
+
   static String capitalize(String text) {
     if (text.isEmpty) return text;
     return text[0].toUpperCase() + text.substring(1);
   }
+
   static bool isEmail(String text) {
     return text.contains('@');
   }
 }
 
 void main() {
+
   var name = 'john';
+
   var capitalized = StringUtils.capitalize(name);
   var isEmail = StringUtils.isEmail('test@mail.com');
-  print('Original name : \$name');
-  print('Capitalized    : \$capitalized');
-  print('Is Email       : \$isEmail');
+
+  print('Original name : $name');
+  print('Capitalized    : $capitalized');
+  print('Is Email       : $isEmail');
 }
 </code></pre>
+
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openDartPad(`class StringUtils {
-  static String capitalize(String text) {
-    if (text.isEmpty) return text;
-    return text[0].toUpperCase() + text.substring(1);
-  }
-  static bool isEmail(String text) {
-    return text.contains('@');
-  }
-}
-void main() {
-  var name = 'john';
-  var capitalized = StringUtils.capitalize(name);
-  var isEmail = StringUtils.isEmail('test@mail.com');
-  print('Original name : \$name');
-  print('Capitalized    : \$capitalized');
-  print('Is Email       : \$isEmail');
-}`)">
-          ▶ JALANKAN KODE
-        </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/b8c33fb990d3a01fba6977ed032cc174')">JALANKAN
+          KODE </button>
       </div>
     </div>
 
-    <!-- ==================== CARD 4: SOLUSI EXTENSION ==================== -->
     <div class="card">
-      <h2>3. Solusi dengan Extension Methods</h2>
+      <h2>3.Solusi dengan Extension Methods</h2>
       <p>
-        Extension Methods adalah fitur yang memungkinkan kita menambahkan method baru ke tipe data yang sudah ada
-        tanpa harus mengubah kode aslinya. Ini adalah solusi elegan untuk masalah-masalah yang sebelumnya dihadapi.
+      Extension Methods adalah fitur yang memungkinkan kita menambahkan method baru ke tipe data yang sudah ada
+      tanpa harus mengubah kode aslinya.
+      ini adalah solusi elegan untuk masalah-masalah yang sebelumnya dihadapi.
       </p>
       <pre><code>
 // ==========================================
@@ -386,116 +375,99 @@ void main() {
 // ==========================================
 
 extension StringExtensions on String {
+
   String capitalize() {
     if (isEmpty) return this;
     return this[0].toUpperCase() + substring(1);
   }
+
   bool get isEmail => contains('@');
+
   String reverse() {
     return split('').reversed.join();
   }
 }
 
 void main() {
+
   var name = 'john';
+
   var capitalized = name.capitalize();
   var isEmail = 'test@mail.com'.isEmail;
   var reversed = 'hello'.reverse();
-  print('Original name : \$name');
-  print('Capitalized    : \$capitalized');
-  print('Is Email       : \$isEmail');
-  print('Reverse hello  : \$reversed');
+
+  print('Original name : $name');
+  print('Capitalized    : $capitalized');
+  print('Is Email       : $isEmail');
+  print('Reverse hello  : $reversed');
 }
 </code></pre>
+
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openDartPad(`extension StringExtensions on String {
-  String capitalize() {
-    if (isEmpty) return this;
-    return this[0].toUpperCase() + substring(1);
-  }
-  bool get isEmail => contains('@');
-  String reverse() {
-    return split('').reversed.join();
-  }
-}
-void main() {
-  var name = 'john';
-  var capitalized = name.capitalize();
-  var isEmail = 'test@mail.com'.isEmail;
-  var reversed = 'hello'.reverse();
-  print('Original name : \$name');
-  print('Capitalized    : \$capitalized');
-  print('Is Email       : \$isEmail');
-  print('Reverse hello  : \$reversed');
-}`)">
-          ▶ JALANKAN KODE
-        </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/43c960d80a23f6101cc2322b3ff6323f')">JALANKAN
+          KODE </button>
       </div>
     </div>
 
-    <!-- ==================== CARD 5: SINTAKS EXTENSION ==================== -->
     <div class="card">
       <h2>4. Sintaks Extension Methods</h2>
-      <p>Extension Methods memungkinkan Anda menambahkan fungsi baru ke tipe data yang sudah ada</p>
+      <p>
+Extension Methods memungkinkan Anda menambahkan fungsi baru ke tipe data yang sudah ada
+      </p>
       <pre><code>
 // ==========================================
 // Nama  : Putra Dhafir Nashrullah
 // NIM   : 251410009
 // Kelas : SI2A
 // ==========================================
-
 extension DateTimeExtensions on DateTime {
+
+  // Method
   String toFormattedString() {
-    return '\$day/\$month/\$year';
+    return '$day/$month/$year';
   }
+
+  // Getter
   bool get isToday {
     var now = DateTime.now();
-    return year == now.year && month == now.month && day == now.day;
+
+    return year == now.year &&
+           month == now.month &&
+           day == now.day;
   }
+
+  // Operator
   DateTime operator +(Duration duration) {
     return add(duration);
   }
 }
 
 void main() {
+
   DateTime today = DateTime.now();
-  print('Tanggal hari ini        : \${today.toFormattedString()}');
-  print('Apakah hari ini?        : \${today.isToday}');
+
+  print('Tanggal hari ini        : ${today.toFormattedString()}');
+  print('Apakah hari ini?        : ${today.isToday}');
+
   DateTime nextDay = today + Duration(days: 1);
-  print('Tanggal setelah ditambah: \${nextDay.toFormattedString()}');
+
+  print('Tanggal setelah ditambah: ${nextDay.toFormattedString()}');
 }
 </code></pre>
+
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openDartPad(`extension DateTimeExtensions on DateTime {
-  String toFormattedString() {
-    return '\$day/\$month/\$year';
-  }
-  bool get isToday {
-    var now = DateTime.now();
-    return year == now.year && month == now.month && day == now.day;
-  }
-  DateTime operator +(Duration duration) {
-    return add(duration);
-  }
-}
-void main() {
-  DateTime today = DateTime.now();
-  print('Tanggal hari ini        : \${today.toFormattedString()}');
-  print('Apakah hari ini?        : \${today.isToday}');
-  DateTime nextDay = today + Duration(days: 1);
-  print('Tanggal setelah ditambah: \${nextDay.toFormattedString()}');
-}`)">
-          ▶ JALANKAN KODE
-        </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/ca7438a8bedd6a209dd90d4943a438be')">JALANKAN
+          KODE </button>
       </div>
     </div>
 
-    <!-- ==================== CARD 6: NULL SAFETY ==================== -->
     <div class="card">
-      <h2>5. Extension untuk Null Safety</h2>
+      <h2>6.Extension untuk Null Safety</h2>
       <p>
-        Null Safety Extension adalah extension method yang dirancang khusus untuk menangani tipe data yang mungkin 
-        bernilai null (nullable types). Extension ini membantu kita mengelola nilai null dengan aman tanpa harus menulis kode pengecekan if (value == null) berulang-ulang.
+       Null Safety Extension adalah extension method yang dirancang khusus untuk menangani tipe data yang mungkin 
+       bernilai null (nullable types).
+       Extension ini membantu kita mengelola nilai null dengan aman tanpa harus menulis kode pengecekan if (value == null) berulang-ulang.
+        \\
       </p>
       <pre><code>
 // ==========================================
@@ -505,49 +477,40 @@ void main() {
 // ==========================================
 
 extension NullableStringExtensions on String? {
+
   String orEmpty() => this ?? '';
+
   bool get isNullOrEmpty => this == null || this!.isEmpty;
+
   bool get isNotNullOrEmpty => !isNullOrEmpty;
+
   String withDefault(String defaultValue) {
     return this ?? defaultValue;
   }
 }
 
 void main() {
+
   String? name;
-  print('Hasil orEmpty()            : \${name.orEmpty()}');
-  print('Hasil isNullOrEmpty        : \${name.isNullOrEmpty}');
-  print('Hasil isNotNullOrEmpty     : \${name.isNotNullOrEmpty}');
-  print('Hasil withDefault("Guest") : \${name.withDefault('Guest')}');
+
+  print('Hasil orEmpty()            : ${name.orEmpty()}');
+  print('Hasil isNullOrEmpty        : ${name.isNullOrEmpty}');
+  print('Hasil isNotNullOrEmpty     : ${name.isNotNullOrEmpty}');
+  print('Hasil withDefault("Guest") : ${name.withDefault('Guest')}');
 }
 </code></pre>
+
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openDartPad(`extension NullableStringExtensions on String? {
-  String orEmpty() => this ?? '';
-  bool get isNullOrEmpty => this == null || this!.isEmpty;
-  bool get isNotNullOrEmpty => !isNullOrEmpty;
-  String withDefault(String defaultValue) {
-    return this ?? defaultValue;
-  }
-}
-void main() {
-  String? name;
-  print('Hasil orEmpty()            : \${name.orEmpty()}');
-  print('Hasil isNullOrEmpty        : \${name.isNullOrEmpty}');
-  print('Hasil isNotNullOrEmpty     : \${name.isNotNullOrEmpty}');
-  print('Hasil withDefault("Guest") : \${name.withDefault('Guest')}');
-}`)">
-          ▶ JALANKAN KODE
-        </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/30d4c7c01a8828ef84d9eba3bf70edbe')">JALANKAN
+          KODE </button>
       </div>
     </div>
 
-    <!-- ==================== CARD 7: UTILITIES DART TYPES ==================== -->
     <div class="card">
-      <h2>6. Utilities untuk Dart Types - PRAKTEK 1</h2>
+      <h2>7.Utilities untuk Dart Types - PRAKTEK 1</h2>
       <p>
-        Membuat extension methods sebagai utilities untuk tipe data bawaan Dart (String, int, double, bool, List, Map)
-        agar kode lebih bersih, reusable, dan mudah digunakan.
+      Membuat extension methods sebagai utilities untuk tipe data bawaan Dart (String, int, double, bool, List, Map)
+      agar kode lebih bersih, reusable, dan mudah digunakan.
       </p>
       <pre><code>
 // ==========================================
@@ -555,136 +518,123 @@ void main() {
 // NIM   : 251410009
 // Kelas : SI2A
 // ==========================================
-
 extension NumberExtensions on num {
+
+  // Format ke Rupiah
   String toRupiah() {
-    return 'Rp\${toStringAsFixed(0)}';
+    return 'Rp${toStringAsFixed(0)}';
   }
+
+  // Cek nilai dalam range
   bool isBetween(num min, num max) {
     return this >= min && this <= max;
   }
+
+  // Pangkat
   num power(int exponent) {
+
     var result = this;
+
     for (var i = 1; i < exponent; i++) {
       result *= this;
     }
+
     return result;
   }
 }
 
 void main() {
+
   var price = 150000;
-  print('Harga dalam rupiah : \${price.toRupiah()}');
-  print('Apakah antara 1-10 : \${5.isBetween(1, 10)}');
-  print('Hasil 2 pangkat 3  : \${2.power(3)}');
+
+  print('Harga dalam rupiah : ${price.toRupiah()}');
+  print('Apakah antara 1-10 : ${5.isBetween(1, 10)}');
+  print('Hasil 2 pangkat 3  : ${2.power(3)}');
 }
 </code></pre>
+
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openDartPad(`extension NumberExtensions on num {
-  String toRupiah() {
-    return 'Rp\${toStringAsFixed(0)}';
-  }
-  bool isBetween(num min, num max) {
-    return this >= min && this <= max;
-  }
-  num power(int exponent) {
-    var result = this;
-    for (var i = 1; i < exponent; i++) {
-      result *= this;
-    }
-    return result;
-  }
-}
-void main() {
-  var price = 150000;
-  print('Harga dalam rupiah : \${price.toRupiah()}');
-  print('Apakah antara 1-10 : \${5.isBetween(1, 10)}');
-  print('Hasil 2 pangkat 3  : \${2.power(3)}');
-}`)">
-          ▶ JALANKAN KODE
-        </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/1bb1b0e8bc72ab446e9cc1b6ce19dec8')">JALANKAN
+          KODE </button>
       </div>
     </div>
 
-    <!-- ==================== CARD 8: GENERIC EXTENSIONS ==================== -->
+    
     <div class="card">
-      <h2>7. Generic Extensions</h2>
-      <p>
-        Generic Extensions adalah fitur yang memungkinkan kita membuat extension method yang bisa bekerja pada berbagai 
-        tipe data sekaligus, tanpa harus menulis ulang kode untuk setiap tipe.
-      </p>
-      <pre><code>
+      <h2>8.Generic Extensions</h2>
+      <p> Generic Extensions adalah fitur yang memungkinkan kita membuat extension method yang bisa bekerja pada berbagai 
+        tipe data sekaligus,
+        tanpa harus menulis ulang kode untuk setiap tipe.
+
+ <pre><code>
 // ==========================================
 // Nama  : Putra Dhafir Nashrullah
 // NIM   : 251410009
 // Kelas : SI2A
 // ==========================================
+extension ListExtensions on List {
 
-extension ListExtensions<T> on List<T> {
+  // Mengambil index dengan aman
   T? getOrNull(int index) {
-    if (index < 0 || index >= length) return null;
+    if (index < 0 || index >= length) {
+      return null;
+    }
+
     return this[index];
   }
-  List<List<T>> chunk(int size) {
-    List<List<T>> chunks = [];
+
+  // Membagi list menjadi beberapa bagian
+  List> chunk(int size) {
+
+    var chunks = >[];
+
     for (var i = 0; i < length; i += size) {
-      chunks.add(sublist(i, i + size > length ? length : i + size));
+
+      chunks.add(
+        sublist(i, i + size > length ? length : i + size)
+      );
     }
+
     return chunks;
   }
-  List<T> distinct() {
-    List<T> result = [];
+
+  // Menghapus data duplikat
+  List distinct() {
+
+    var result = [];
+
     for (var item in this) {
+
       if (!result.contains(item)) {
         result.add(item);
       }
     }
+
     return result;
   }
 }
 
 void main() {
+
   var numbers = [1, 2, 3, 4, 5, 6, 7];
-  print('Data chunk : \${numbers.chunk(3)}');
-  print('Data distinct : \${[1, 2, 2, 3, 3].distinct()}');
+
+  print('Data chunk : ${numbers.chunk(3)}');
+
+  print(
+    'Data distinct : ${[1, 2, 2, 3, 3].distinct()}'
+  );
 }
 </code></pre>
+      </p>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openDartPad(`extension ListExtensions<T> on List<T> {
-  T? getOrNull(int index) {
-    if (index < 0 || index >= length) return null;
-    return this[index];
-  }
-  List<List<T>> chunk(int size) {
-    List<List<T>> chunks = [];
-    for (var i = 0; i < length; i += size) {
-      chunks.add(sublist(i, i + size > length ? length : i + size));
-    }
-    return chunks;
-  }
-  List<T> distinct() {
-    List<T> result = [];
-    for (var item in this) {
-      if (!result.contains(item)) {
-        result.add(item);
-      }
-    }
-    return result;
-  }
-}
-void main() {
-  var numbers = [1, 2, 3, 4, 5, 6, 7];
-  print('Data chunk : \${numbers.chunk(3)}');
-  print('Data distinct : \${[1, 2, 2, 3, 3].distinct()}');
-}`)">
-          ▶ JALANKAN KODE
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/87d44db88abf4f0f3be564810236b5ce')"> JALANKAN KODE
         </button>
       </div>
     </div>
 
   </div>
 
-  <!-- MODAL STRUCTURE -->
+  <!-- --- MODAL STRUCTURE --- -->
   <div id="codeModal" class="modal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeModal()">&times;</span>
@@ -693,20 +643,15 @@ void main() {
   </div>
 
   <footer>
-    © 2026 - PUTRA DHAFIR NASHRULLAH | Tugas Pemrograman Berorientasi Objek
+    © 2026 - PUTRA DHAFIR NASHRULLAH
   </footer>
 
   <script>
-    // FUNGSI MEMBUAT DARTPAD DARI KODE DART
-    function openDartPad(code) {
-      // Encode kode Dart ke format URL
-      const encodedCode = encodeURIComponent(code);
-      const dartUrl = `https://dartpad.dev/embed-dart.html?theme=dark&run=true&code=${encodedCode}`;
-      
-      // Tampilkan modal dan set iframe
+    // FUNGSI MODAL
+    function openModal(url) {
       document.getElementById("codeModal").style.display = "block";
-      document.getElementById("dartFrame").src = dartUrl;
-      document.body.style.overflow = "hidden";
+      document.getElementById("dartFrame").src = url;
+      document.body.style.overflow = "hidden"; // Disable scroll background
     }
 
     function closeModal() {
@@ -715,13 +660,28 @@ void main() {
       document.body.style.overflow = "auto";
     }
 
-    // Close modal jika klik di luar konten
-    window.onclick = function(event) {
-      const modal = document.getElementById("codeModal");
-      if (event.target == modal) {
+    // Close modal if user clicks outside of it
+    window.onclick = function (event) {
+      if (event.target == document.getElementById("codeModal")) {
         closeModal();
       }
     }
+
+    // FUNGSI KOMENTAR
+    document.getElementById("commentForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      var name = document.getElementById("name").value;
+      var comment = document.getElementById("comment").value;
+
+      var commentBox = document.createElement("div");
+      commentBox.classList.add("comment-box");
+      commentBox.innerHTML = "<strong>" + name + "</strong><p>" + comment + "</p>";
+
+      document.getElementById("comment-list").prepend(commentBox);
+
+      document.getElementById("name").value = "";
+      document.getElementById("comment").value = "";
+    });
   </script>
 </body>
 
