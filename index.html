@@ -310,7 +310,7 @@ void main() {
 </code></pre>
 
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal("https://dartpad.dev/ed61c2e921bc3923740e2d6d698a5c15")">JALANKAN
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/ed61c2e921bc3923740e2d6d698a5c15')">JALANKAN
           KODE </button>
       </div>
     </div>
@@ -632,6 +632,483 @@ void main() {
       </div>
     </div>
 
+ <div class="card">
+      <h2>9.Unnamed Extensions/</h2>
+      <p> Unnamed Extensions (Ekstensi Tanpa Nama) adalah fitur dalam bahasa pemrograman Dart yang memungkinkan Anda menambahkan fungsionalitas baru ke tipe data yang sudah ada
+        (seperti String, int, atau class sendiri)
+        tanpa harus memberikan nama pada ekstensi tersebut
+ <pre><code>
+// ==========================================
+// Nama  : Putra Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
+extension on DateTime {
+
+  String get toYYYYMMDD {
+
+    return '$year-'
+           '${month.toString().padLeft(2, '0')}-'
+           '${day.toString().padLeft(2, '0')}';
+  }
+
+  DateTime get startOfDay {
+    return DateTime(year, month, day);
+  }
+}
+
+void main() {
+
+  var today = DateTime.now();
+
+  print('Format tanggal : ${today.toYYYYMMDD}');
+  print('Awal hari      : ${today.startOfDay}');
+}
+</code></pre>
+      </p>
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/93d797b33b977d84d403db4b805fbc76')"> JALANKAN KODE
+        </button>
+      </div>
+    </div>
+
+ <div class="card">
+      <h2>10.Konflik Nama Extension/</h2>
+      <p> Konflik nama terjadi ketika dua atau lebih ekstensi (baik yang bernama maupun tidak bernama)
+         memiliki nama method, getter,
+         atau operator yang sama untuk tipe yang sama, dan cakupannya (scope) saling tumpang tindih.
+ <pre><code>
+// ==========================================
+// Nama  : Putra Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
+// Extension pertama
+extension StringCaseExtensions on String {
+
+  String capitalize() {
+    return
+      "${this[0].toUpperCase()}${substring(1)}";
+  }
+}
+
+// Extension kedua
+extension TextUtilsExtensions on String {
+
+  String capitalize() {
+    return
+      ">>> ${toUpperCase()} <<<";
+  }
+}
+
+void main() {
+
+  var text = 'hello';
+
+  // Menggunakan extension pertama
+  print(
+    StringCaseExtensions(text)
+        .capitalize()
+  );
+
+  // Menggunakan extension kedua
+  print(
+    TextUtilsExtensions(text)
+        .capitalize()
+  );
+}
+</code></pre>
+      </p>
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/5f14beffe12d5152034b35bd3c209cb4')"> JALANKAN KODE
+        </button>
+      </div>
+    </div>
+
+ <div class="card">
+      <h2>11.Extension untuk Custom Classes/</h2>
+      <p> Extension adalah fitur di Dart yang memungkinkan Anda menambahkan fungsionalitas baru 
+        (method, getter, setter, operator) ke tipe data yang sudah ada (baik bawaan seperti String/int, maupun class custom) 
+        tanpa harus mengubah kode aslinya.
+
+
+ <pre><code>
+// ==========================================
+// Nama  : Putra Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
+class Product {
+
+  final String name;
+  final double price;
+
+  Product(this.name, this.price);
+}
+
+// Extension format Rupiah
+extension DoubleRupiahFormatter on double {
+
+  String toRupiah() {
+
+    final intValue = toInt();
+
+    String numberString =
+        intValue.toString();
+
+    String formattedString = '';
+
+    int counter = 0;
+
+    for (int i =
+            numberString.length - 1;
+        i >= 0;
+        i--) {
+
+      formattedString =
+          numberString[i] +
+          formattedString;
+
+      counter++;
+
+      if (counter % 3 == 0 &&
+          i != 0) {
+
+        formattedString =
+            '.$formattedString';
+      }
+    }
+
+    return 'Rp$formattedString';
+  }
+}
+
+// Extension Product
+extension ProductExtensions on Product {
+
+  // Method diskon
+  Product withDiscount(
+      double percentage) {
+
+    var discountedPrice =
+        price *
+        (1 - percentage / 100);
+
+    return Product(
+      name,
+      discountedPrice,
+    );
+  }
+
+  // Getter informasi produk
+  String get displayInfo =>
+      '$name - ${price.toRupiah()}';
+
+  // Getter cek harga mahal
+  bool get isExpensive =>
+      price > 100000;
+}
+
+void main() {
+
+  var laptop =
+      Product('Laptop', 15000000);
+
+  var discounted =
+      laptop.withDiscount(10);
+
+  print("=== DATA LAPTOP ===");
+
+  print(
+    discounted.displayInfo
+  );
+
+  print(
+    "Laptop mahal? "
+    "${laptop.isExpensive}"
+  );
+
+  var keyboard =
+      Product('Keyboard', 75000);
+
+  print("\n=== DATA KEYBOARD ===");
+
+  print(
+    keyboard.displayInfo
+  );
+
+  print(
+    "Keyboard mahal? "
+    "${keyboard.isExpensive}"
+  );
+}
+</code></pre>
+      </p>
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/b1e3366ac6820170ad15be18a7e75c48')"> JALANKAN KODE
+        </button>
+      </div>
+    </div>
+
+     <div class="card">
+      <h2>12.Validator Extensions -PRAKTEK 2/</h2>
+      <p> Validator Extensions adalah penggunaan extension di Dart khusus untuk menambahkan method validasi ke tipe data tertentu 
+        (biasanya String, int, 
+        atau custom class) sehingga kode validasi menjadi lebih ekspresif, reusable, dan terorganisi
+
+
+ <pre><code>
+// ==========================================
+// Nama  : Putra Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
+ Extension validator String
+extension StringValidators on String {
+
+  // Validasi email
+  bool get isEmail {
+
+    return RegExp(
+      r'^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$',
+    ).hasMatch(this);
+  }
+
+  // Validasi nomor HP
+  bool get isPhoneNumber {
+
+    return RegExp(
+      r'^[0-9]{10,13}$',
+    ).hasMatch(this);
+  }
+
+  // Validasi password kuat
+  bool get isStrongPassword {
+
+    return length >= 8 &&
+        contains(
+          RegExp(r'[A-Z]')
+        ) &&
+        contains(
+          RegExp(r'[a-z]')
+        ) &&
+        contains(
+          RegExp(r'[0-9]')
+        );
+  }
+
+  // Validasi URL
+  bool get isUrl {
+
+    try {
+
+      Uri.parse(this);
+
+      return true;
+
+    } catch (_) {
+
+      return false;
+    }
+  }
+}
+
+// Extension validator int
+extension IntValidators on int {
+
+  bool get isAdultAge =>
+      this >= 18;
+
+  bool get isPositive =>
+      this > 0;
+
+  bool get isEven =>
+      this % 2 == 0;
+
+  bool get isOdd =>
+      this % 2 != 0;
+}
+
+void main() {
+
+  var email =
+      'test@example.com';
+
+  var age = 25;
+
+  var password =
+      'Pass1234';
+
+  var phone =
+      '081234567890';
+
+  print("=== VALIDATOR DATA ===");
+
+  print(
+    "Email valid : "
+    "${email.isEmail}"
+  );
+
+  print(
+    "Nomor HP valid : "
+    "${phone.isPhoneNumber}"
+  );
+
+  print(
+    "Password kuat : "
+    "${password.isStrongPassword}"
+  );
+
+  print(
+    "Usia dewasa : "
+    "${age.isAdultAge}"
+  );
+
+  print(
+    "Bilangan genap : "
+    "${10.isEven}"
+  );
+}
+</code></pre>
+      </p>
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/0650e7c66f36f44c7b24f26985ca0b6f')"> JALANKAN KODE
+        </button>
+      </div>
+    </div>
+
+  <div class="card">
+      <h2>13.Konflik Nama Antar Extension - BONUS 1/</h2>
+      <p> Konflik nama antar extension terjadi ketika dua atau lebih extension 
+        (bisa keduanya bernama, atau satu bernama satu tidak) memiliki method, getter, atau operator 
+        dengan nama yang sama untuk tipe data yang sama, dan keduanya berada dalam cakupan (scope) yang sama.
+
+
+
+ <pre><code>
+// ==========================================
+// Nama  : Putra Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
+// Extension pertama
+extension StringNumber on String {
+
+  int toInt() {
+    return int.parse(this);
+  }
+}
+
+// Extension kedua
+extension StringDouble on String {
+
+  double toDouble() {
+    return double.parse(this);
+  }
+}
+
+void main() {
+
+  String angka = '123';
+
+  // Menggunakan extension int
+  print(
+    StringNumber(angka).toInt()
+  );
+
+  // Menggunakan extension double
+  print(
+    StringDouble(angka).toDouble()
+  );
+}
+</code></pre>
+      </p>
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/fcdb5af13119f3050fffdab4e9d97941')"> JALANKAN KODE
+        </button>
+      </div>
+    </div>
+
+  <div class="card">
+      <h2>14.Prioritas Method Asli vs Extension (dan Nullable) - BONUS 2/</h2>
+      <p> Prioritas method adalah aturan di Dart yang menentukan method mana yang akan dipanggil ketika ada
+        nama method yang sama dari sumber yang berbeda (method asli class, extension, atau extension nullable).
+📌 Inti Pemahaman
+Prioritas	Sumber	Contoh Panggilan
+1 (Tertinggi)	Method asli class	"hello".length → punya String
+2	Extension (non-nullable)	"hello".isEmail → dari extension
+3 (Terendah)	Extension nullable	String? → text?.orEmpty
+🎯 Aturan Emas (Hanya 3 Hal yang Perlu Diingat)
+
+
+ <pre><code>
+// ==========================================
+// Nama  : Putra Dhafir Nashrullah
+// NIM   : 251410009
+// Kelas : SI2A
+// ==========================================
+class Greeting {
+
+  String say() =>
+      'Hello from class';
+}
+
+// Extension
+extension GreetingExt on Greeting {
+
+  String sayExt() =>
+      'Hello from extension';
+}
+
+void main() {
+
+  Greeting? obj = Greeting();
+
+  // Method asli class
+  print(obj?.say());
+
+  // Method extension
+  print(obj?.sayExt());
+}
+</code></pre>
+      </p>
+      <div class="run-btn-container">
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/30d1031ddef7cf4ed1aa0a82593aa72b')"> JALANKAN KODE
+        </button>
+      </div>
+    </div>
+    
+ </div
+     <!-- SECTION 15:  -->
+<div class="section">
+    <h2> 15.KESIMPULAN </h2>
+    
+    <p><strong>✦ KESIMPULAN </strong></p>
+    <ul>
+        <li>Kesimpulan
+​Methods adalah perilaku bawaan asli yang dirancang dari dalam suatu
+objek dan memiliki akses penuh ke seluruh datanya, sedangkan
+Extension adalah cara instan untuk menambahkan fungsi baru ke objek tersebut dari luar
+tanpa harus membongkar atau mengubah kode aslinya.
+Secara sederhana, Method adalah fitur bawaan pabrik,
+sementara Extension adalah aksesoris tambahan yang dipasang kemudian untuk memperluas fungsinya.!</li>
+    </ul>
+      </div>
+
+<!-- SECTION 16:  -->
+<div class="section">
+    <h2> 16.PENUTUP </h2>
+    
+    <p><strong>✦ PENUTUP </strong></p>
+    <ul>
+        <li>Penutup
+​Sebagai penutup, perbedaan mendasar antara keduanya terletak pada asal dan hak aksesnya
+: Methods adalah fungsi internal bawaan objek, sedangkan Extension adalah fitur eksternal penambah kemampuan.
+Kombinasi yang tepat dalam penggunaan keduanya akan sangat membantu programmer dalam menulis kode yang lebih rapi dan efektif. 
+Semoga penjelasan ini dapat memberikan pemahaman yang jelas mengenai penerapan Methods dan Extension dalam pengembangan perangkat lunak.!</li>
+    </ul>
+
+  
   </div>
 
   <!-- --- MODAL STRUCTURE --- -->
