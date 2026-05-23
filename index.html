@@ -4,22 +4,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laporan OOP Dart - Putra Dhafir</title>
+  <title>Laporan OOP Dart - Putra Dhafir | Extension & Methods</title>
 
   <!-- Font Keren -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    * {
       margin: 0;
-      background-color: #0a1f1a;
-      font-family: 'Cairo', sans-serif;
-      color: #d4af37;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a0b2e 0%, #2a1a4a 100%);
+      font-family: 'Inter', sans-serif;
+      color: #e9d5ff;
       position: relative;
       overflow-x: hidden;
     }
 
-    /* --- EFEK KETUPAT BACKGROUND --- */
+    /* Background pattern elegan */
     body::before {
       content: '';
       position: fixed;
@@ -27,167 +32,135 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image:
-        linear-gradient(45deg, #1a5c3a 25%, transparent 25%),
-        linear-gradient(-45deg, #1a5c3a 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #1a5c3a 75%),
-        linear-gradient(-45deg, transparent 75%, #1a5c3a 75%);
-      background-size: 60px 60px;
-      background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
-      opacity: 0.1;
+      background-image: 
+        radial-gradient(circle at 25% 40%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 75% 60%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
       z-index: -1;
       pointer-events: none;
     }
 
     header {
-      background: #1a5c3a;
-      padding: 25px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 100%);
+      padding: 32px 20px;
       text-align: center;
-      border-bottom: 6px solid #d4af37;
+      border-bottom: 4px solid #a855f7;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
     }
 
     header h1 {
-      font-size: 14px;
-      line-height: 1.6;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 8px;
     }
 
     header p {
-      font-size: 10px;
-      margin-top: 10px;
+      font-size: 14px;
+      color: #c084fc;
+      font-weight: 500;
     }
 
     .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
+      max-width: 1100px;
+      margin: 48px auto;
+      padding: 0 24px;
     }
 
     .card {
-      background: #0d2b22;
-      padding: 20px;
-      margin-bottom: 40px;
-      border: 4px solid #d4af37;
-      box-shadow: 8px 8px 0px #1a5c3a;
+      background: rgba(46, 16, 101, 0.6);
+      backdrop-filter: blur(2px);
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 32px;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: #a855f7;
+      transform: translateY(-3px);
     }
 
     h2 {
-      font-size: 12px;
-      color: #ffd700;
+      font-size: 22px;
+      font-weight: 700;
+      color: #d8b4fe;
+      margin-bottom: 16px;
+      border-left: 5px solid #a855f7;
+      padding-left: 16px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #e9d5ff;
       margin-bottom: 20px;
     }
 
-    p,
-    li {
-      font-size: 10px;
-      line-height: 1.8;
+    ul {
+      padding-left: 24px;
+      margin-bottom: 20px;
     }
 
-    ul {
-      padding-left: 20px;
+    li {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #e9d5ff;
+      margin-bottom: 8px;
     }
 
     pre {
-      background: #051410;
-      color: #90ee90;
-      padding: 15px;
-      font-size: 9px;
+      background: #0f0717;
+      padding: 20px;
+      border-radius: 16px;
+      font-size: 13px;
       overflow-x: auto;
-      border: 3px solid #d4af37;
+      border: 1px solid #4c1d95;
+      color: #d8b4fe;
+      font-family: 'Monaco', 'Menlo', monospace;
+      margin: 20px 0;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
     }
 
-    .dartpad-iframe {
-      display: none;
-      margin-top: 20px;
-      border: 4px solid #ffd700;
-      width: 100%;
-      height: 500px;
-    }
-
-    .dartpad-iframe.show {
-      display: block;
+    code {
+      font-family: 'Monaco', 'Menlo', monospace;
     }
 
     .run-btn-container {
       text-align: center;
-      margin-top: 15px;
-    }
-
-    .run-btn {
-      background-color: #1a5c3a;
-      color: #d4af37;
-      border: 4px solid #d4af37;
-      padding: 15px 20px;
-      font-family: 'Cairo', sans-serif;
-      font-size: 10px;
-      text-decoration: none;
-      cursor: pointer;
-      box-shadow: 6px 6px 0px #051410;
-      display: inline-block;
-      transition: transform 0.1s, box-shadow 0.1s;
-    }
-
-    .run-btn:hover {
-      transform: translate(2px, 2px);
-      box-shadow: 4px 4px 0px #051410;
-    }
-
-    .run-btn:active {
-      transform: translate(6px, 6px);
-      box-shadow: 0px 0px 0px #051410;
-    }
-
-    /* --- STYLE FORUM KOMENTAR --- */
-    .forum-container {
-      background: #0d2b22;
-      padding: 20px;
-      margin-bottom: 40px;
-      border: 4px solid #d4af37;
-      box-shadow: 8px 8px 0px #1a5c3a;
-    }
-
-    .forum-container h2 {
-      font-size: 12px;
-      color: #ffd700;
-      margin-bottom: 20px;
-    }
-
-    .forum-container input,
-    .forum-container textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      font-family: 'Cairo', sans-serif;
-      font-size: 8px;
-      background: #051410;
-      color: #d4af37;
-      border: 3px solid #d4af37;
-    }
-
-    .forum-container button {
-      background: #1a5c3a;
-      color: #d4af37;
-      padding: 10px;
-      border: 3px solid #d4af37;
-      cursor: pointer;
-      font-family: 'Cairo', sans-serif;
-      font-size: 8px;
-    }
-
-    .forum-container button:hover {
-      background: #2a7a4a;
-    }
-
-    #comment-list {
       margin-top: 20px;
     }
 
-    .comment-box {
-      margin-top: 15px;
-      border-top: 2px dashed #d4af37;
-      padding-top: 10px;
+    .run-btn {
+      background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%);
+      color: #f3e8ff;
+      border: none;
+      padding: 12px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    /* --- MODAL POPUP STYLE --- */
+    .run-btn:hover {
+      background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+    }
+
+    .run-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Modal Style */
     .modal {
       display: none;
       position: fixed;
@@ -206,12 +179,12 @@
       left: 50%;
       transform: translate(-50%, -50%);
       width: 90%;
-      height: 80%;
-      background: #0d2b22;
-      border: 4px solid #d4af37;
-      border-radius: 15px;
+      height: 85%;
+      background: #1e102f;
+      border-radius: 28px;
       overflow: hidden;
-      box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 0 48px rgba(168, 85, 247, 0.4);
+      border: 1px solid #a855f7;
     }
 
     .modal-content iframe {
@@ -223,24 +196,96 @@
     .close-modal {
       position: absolute;
       right: 20px;
-      top: 10px;
-      font-size: 40px;
-      color: #d4af37;
+      top: 12px;
+      font-size: 36px;
+      color: #d8b4fe;
       cursor: pointer;
       z-index: 1001;
-      font-weight: 900;
+      font-weight: 800;
+      transition: color 0.2s;
     }
 
     .close-modal:hover {
-      color: #ffd700;
+      color: #f3e8ff;
+    }
+
+    /* KESIMPULAN & PENUTUP - DESAIN RAPI */
+    .conclusion-section,
+    .closing-section {
+      background: linear-gradient(135deg, #2e1065 0%, #3b0764 100%);
+      border-radius: 28px;
+      padding: 32px;
+      margin-bottom: 32px;
+      border: 1px solid #a855f7;
+      box-shadow: 0 20px 35px -12px black;
+    }
+
+    .conclusion-section h2,
+    .closing-section h2 {
+      font-size: 28px;
+      font-weight: 800;
+      text-align: center;
+      border-left: none;
+      padding-left: 0;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #f3e8ff 0%, #c084fc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .highlight-box {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      padding: 24px;
+      margin-top: 16px;
+      border-left: 6px solid #c084fc;
+    }
+
+    .highlight-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: #f3e8ff;
+      margin-bottom: 12px;
+    }
+
+    .insight-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #d8b4fe;
+    }
+
+    .closing-quote {
+      text-align: center;
+      font-style: italic;
+      font-size: 17px;
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(168, 85, 247, 0.15);
+      border-radius: 24px;
+      font-weight: 500;
     }
 
     footer {
-      background: #1a5c3a;
+      background: #1a0b2e;
       text-align: center;
-      padding: 20px;
-      font-size: 10px;
-      border-top: 6px solid #d4af37;
+      padding: 28px;
+      font-size: 14px;
+      border-top: 1px solid #4c1d95;
+      color: #a855f7;
+      font-weight: 500;
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        padding: 0 16px;
+      }
+      .card {
+        padding: 20px;
+      }
+      h2 {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
@@ -248,34 +293,19 @@
 <body>
 
   <header>
-    <h1>Extension serta Methods</h1>
-    <p>PUTRA DHAFIR NASHRULLAH | NIM: 251410009</p>
+    <h1>Extension & Methods di Dart</h1>
+    <p>PUTRA DHAFIR NASHRULLAH | NIM: 251410009 | SI2A</p>
   </header>
 
   <div class="container">
 
+    <!-- Builder Pattern -->
     <div class="card">
       <h2>1. Builder Pattern</h2>
-
-      <p>
-        <strong>Builder Pattern adalah design pattern creational yang memungkinkan pembuatan objek kompleks secara bertahap.
-  Pattern ini memisahkan proses konstruksi dari representasi akhir objek,
-  sehingga proses pembuatan yang sama bisa menghasilkan representasi objek yang berbeda.
-      </p>
-    </li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>1.Builder Pattern </h2>
-      <p>
-        Builder Pattern adalah design pattern creational yang memungkinkan pembuatan objek kompleks secara bertahap.
-        Pattern ini memisahkan proses konstruksi dari representasi akhir objek,
-        sehingga proses pembuatan yang sama bisa menghasilkan representasi objek yang berbeda.
-      </p>
-      <pre><code>
-// ==========================================
-// Nama  :  Putr Dhafir Nashrullah
+      <p><strong>Builder Pattern</strong> adalah design pattern creational yang memungkinkan pembuatan objek kompleks secara bertahap.
+      Pattern ini memisahkan proses konstruksi dari representasi akhir objek, sehingga proses pembuatan yang sama bisa menghasilkan representasi objek yang berbeda.</p>
+      <pre><code>// ==========================================
+// Nama  : Putra Dhafir Nashrullah
 // NIM   : 251410009
 // Kelas : SI2A
 // ==========================================
@@ -283,17 +313,14 @@
 class Config {}
 
 class ConfigBuilder {
-
   ConfigBuilder host(String h) {
     print("Host : $h");
     return this;
   }
-
   ConfigBuilder port(int p) {
     print("Port : $p");
     return this;
   }
-
   Config build() {
     print("Config berhasil dibuat");
     return Config();
@@ -301,817 +328,306 @@ class ConfigBuilder {
 }
 
 void main() {
-
   ConfigBuilder()
       .host('localhost')
       .port(8080)
       .build();
-}
-</code></pre>
-
+}</code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/ed61c2e921bc3923740e2d6d698a5c15')">JALANKAN
-          KODE </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/ed61c2e921bc3923740e2d6d698a5c15')">Jalankan Kode</button>
       </div>
     </div>
 
+    <!-- Masalah Tanpa Extension -->
     <div class="card">
-      <h2>2.Masalah Tanpa Extension Methods</h2>
-      <p>
-       Extension Methods adalah fitur dalam bahasa pemrograman (seperti Dart, Kotlin, C#, Swift) yang memungkinkan kita menambahkan
-        fungsi baru ketipe data yang sudah ada,
-        tanpa harus mengubah kode asli dari tipe data tersebut.
-      </p>
-      <pre><code>
-// ==========================================
+      <h2>2. Masalah Tanpa Extension Methods</h2>
+      <p>Extension Methods adalah fitur yang memungkinkan kita menambahkan fungsi baru ke tipe data yang sudah ada, tanpa mengubah kode asli.</p>
+      <pre><code>// ==========================================
 // Nama  : Putra Dhafir Nashrullah
 // NIM   : 251410009
 // Kelas : SI2A
 // ==========================================
 
 class StringUtils {
-
   static String capitalize(String text) {
     if (text.isEmpty) return text;
     return text[0].toUpperCase() + text.substring(1);
   }
-
   static bool isEmail(String text) {
     return text.contains('@');
   }
 }
 
 void main() {
-
   var name = 'john';
-
   var capitalized = StringUtils.capitalize(name);
   var isEmail = StringUtils.isEmail('test@mail.com');
-
   print('Original name : $name');
   print('Capitalized    : $capitalized');
   print('Is Email       : $isEmail');
-}
-</code></pre>
-
+}</code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/b8c33fb990d3a01fba6977ed032cc174')">JALANKAN
-          KODE </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/b8c33fb990d3a01fba6977ed032cc174')">Jalankan Kode</button>
       </div>
     </div>
 
+    <!-- Solusi Extension Methods -->
     <div class="card">
-      <h2>3.Solusi dengan Extension Methods</h2>
-      <p>
-      Extension Methods adalah fitur yang memungkinkan kita menambahkan method baru ke tipe data yang sudah ada
-      tanpa harus mengubah kode aslinya.
-      ini adalah solusi elegan untuk masalah-masalah yang sebelumnya dihadapi.
-      </p>
-      <pre><code>
-// ==========================================
+      <h2>3. Solusi dengan Extension Methods</h2>
+      <p>Extension Methods memberi kita kemampuan menambahkan method baru ke tipe data existing secara elegan dan readable.</p>
+      <pre><code>// ==========================================
 // Nama  : Putra Dhafir Nashrullah
 // NIM   : 251410009
 // Kelas : SI2A
 // ==========================================
 
 extension StringExtensions on String {
-
   String capitalize() {
     if (isEmpty) return this;
     return this[0].toUpperCase() + substring(1);
   }
-
   bool get isEmail => contains('@');
-
-  String reverse() {
-    return split('').reversed.join();
-  }
+  String reverse() => split('').reversed.join();
 }
 
 void main() {
-
   var name = 'john';
-
-  var capitalized = name.capitalize();
-  var isEmail = 'test@mail.com'.isEmail;
-  var reversed = 'hello'.reverse();
-
-  print('Original name : $name');
-  print('Capitalized    : $capitalized');
-  print('Is Email       : $isEmail');
-  print('Reverse hello  : $reversed');
-}
-</code></pre>
-
+  print('Capitalized    : ${name.capitalize()}');
+  print('Is Email       : ${'test@mail.com'.isEmail}');
+  print('Reverse hello  : ${'hello'.reverse()}');
+}</code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/43c960d80a23f6101cc2322b3ff6323f')">JALANKAN
-          KODE </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/43c960d80a23f6101cc2322b3ff6323f')">Jalankan Kode</button>
       </div>
     </div>
 
+    <!-- Sintaks Extension Methods -->
     <div class="card">
       <h2>4. Sintaks Extension Methods</h2>
-      <p>
-Extension Methods memungkinkan Anda menambahkan fungsi baru ke tipe data yang sudah ada
-      </p>
-      <pre><code>
-// ==========================================
-// Nama  : Putra Dhafir Nashrullah
-// NIM   : 251410009
-// Kelas : SI2A
-// ==========================================
-extension DateTimeExtensions on DateTime {
-
-  // Method
-  String toFormattedString() {
-    return '$day/$month/$year';
-  }
-
-  // Getter
+      <p>Extension methods memungkinkan Anda menambahkan fungsi, getter, dan operator ke tipe data yang sudah ada.</p>
+      <pre><code>extension DateTimeExtensions on DateTime {
+  String toFormattedString() => '$day/$month/$year';
   bool get isToday {
     var now = DateTime.now();
-
-    return year == now.year &&
-           month == now.month &&
-           day == now.day;
+    return year == now.year && month == now.month && day == now.day;
   }
-
-  // Operator
-  DateTime operator +(Duration duration) {
-    return add(duration);
-  }
-}
-
-void main() {
-
-  DateTime today = DateTime.now();
-
-  print('Tanggal hari ini        : ${today.toFormattedString()}');
-  print('Apakah hari ini?        : ${today.isToday}');
-
-  DateTime nextDay = today + Duration(days: 1);
-
-  print('Tanggal setelah ditambah: ${nextDay.toFormattedString()}');
-}
-</code></pre>
-
+  DateTime operator +(Duration duration) => add(duration);
+}</code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/ca7438a8bedd6a209dd90d4943a438be')">JALANKAN
-          KODE </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/ca7438a8bedd6a209dd90d4943a438be')">Jalankan Kode</button>
       </div>
     </div>
 
+    <!-- Null Safety Extension -->
     <div class="card">
-      <h2>6.Extension untuk Null Safety</h2>
-      <p>
-       Null Safety Extension adalah extension method yang dirancang khusus untuk menangani tipe data yang mungkin 
-       bernilai null (nullable types).
-       Extension ini membantu kita mengelola nilai null dengan aman tanpa harus menulis kode pengecekan if (value == null) berulang-ulang.
-        \\
-      </p>
-      <pre><code>
-// ==========================================
-// Nama  : Putra Dhafir Nashrullah
-// NIM   : 251410009
-// Kelas : SI2A
-// ==========================================
-
-extension NullableStringExtensions on String? {
-
+      <h2>5. Extension untuk Null Safety</h2>
+      <p>Null Safety Extension membantu menangani nullable types dengan aman tanpa banyak pengecekan manual.</p>
+      <pre><code>extension NullableStringExtensions on String? {
   String orEmpty() => this ?? '';
-
   bool get isNullOrEmpty => this == null || this!.isEmpty;
-
   bool get isNotNullOrEmpty => !isNullOrEmpty;
-
-  String withDefault(String defaultValue) {
-    return this ?? defaultValue;
-  }
-}
-
-void main() {
-
-  String? name;
-
-  print('Hasil orEmpty()            : ${name.orEmpty()}');
-  print('Hasil isNullOrEmpty        : ${name.isNullOrEmpty}');
-  print('Hasil isNotNullOrEmpty     : ${name.isNotNullOrEmpty}');
-  print('Hasil withDefault("Guest") : ${name.withDefault('Guest')}');
-}
-</code></pre>
-
+  String withDefault(String defaultValue) => this ?? defaultValue;
+}</code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/30d4c7c01a8828ef84d9eba3bf70edbe')">JALANKAN
-          KODE </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/30d4c7c01a8828ef84d9eba3bf70edbe')">Jalankan Kode</button>
       </div>
     </div>
 
+    <!-- Utilities untuk Dart Types -->
     <div class="card">
-      <h2>7.Utilities untuk Dart Types - PRAKTEK 1</h2>
-      <p>
-      Membuat extension methods sebagai utilities untuk tipe data bawaan Dart (String, int, double, bool, List, Map)
-      agar kode lebih bersih, reusable, dan mudah digunakan.
-      </p>
-      <pre><code>
-// ==========================================
-// Nama  : Putra Dhafir Nashrullah
-// NIM   : 251410009
-// Kelas : SI2A
-// ==========================================
-extension NumberExtensions on num {
-
-  // Format ke Rupiah
-  String toRupiah() {
-    return 'Rp${toStringAsFixed(0)}';
-  }
-
-  // Cek nilai dalam range
-  bool isBetween(num min, num max) {
-    return this >= min && this <= max;
-  }
-
-  // Pangkat
+      <h2>6. Utilities untuk Dart Types (PRAKTEK 1)</h2>
+      <p>Membuat extension sebagai utilities untuk tipe data bawaan agar lebih bersih dan reusable.</p>
+      <pre><code>extension NumberExtensions on num {
+  String toRupiah() => 'Rp${toStringAsFixed(0)}';
+  bool isBetween(num min, num max) => this >= min && this <= max;
   num power(int exponent) {
-
     var result = this;
-
-    for (var i = 1; i < exponent; i++) {
-      result *= this;
-    }
-
+    for (var i = 1; i < exponent; i++) result *= this;
     return result;
   }
-}
-
-void main() {
-
-  var price = 150000;
-
-  print('Harga dalam rupiah : ${price.toRupiah()}');
-  print('Apakah antara 1-10 : ${5.isBetween(1, 10)}');
-  print('Hasil 2 pangkat 3  : ${2.power(3)}');
-}
-</code></pre>
-
+}</code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/1bb1b0e8bc72ab446e9cc1b6ce19dec8')">JALANKAN
-          KODE </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/1bb1b0e8bc72ab446e9cc1b6ce19dec8')">Jalankan Kode</button>
       </div>
     </div>
 
-    
+    <!-- Generic Extensions -->
     <div class="card">
-      <h2>8.Generic Extensions</h2>
-      <p> Generic Extensions adalah fitur yang memungkinkan kita membuat extension method yang bisa bekerja pada berbagai 
-        tipe data sekaligus,
-        tanpa harus menulis ulang kode untuk setiap tipe.
-
- <pre><code>
-// ==========================================
-// Nama  : Putra Dhafir Nashrullah
-// NIM   : 251410009
-// Kelas : SI2A
-// ==========================================
-extension ListExtensions on List {
-
-  // Mengambil index dengan aman
-  T? getOrNull(int index) {
-    if (index < 0 || index >= length) {
-      return null;
-    }
-
-    return this[index];
-  }
-
-  // Membagi list menjadi beberapa bagian
-  List> chunk(int size) {
-
-    var chunks = >[];
-
+      <h2>7. Generic Extensions</h2>
+      <p>Generic Extensions memungkinkan kita membuat extension method yang bekerja pada berbagai tipe data sekaligus.</p>
+      <pre><code>extension ListExtensions<T> on List<T> {
+  T? getOrNull(int index) => (index < 0 || index >= length) ? null : this[index];
+  List<List<T>> chunk(int size) {
+    List<List<T>> chunks = [];
     for (var i = 0; i < length; i += size) {
-
-      chunks.add(
-        sublist(i, i + size > length ? length : i + size)
-      );
+      chunks.add(sublist(i, i + size > length ? length : i + size));
     }
-
     return chunks;
   }
-
-  // Menghapus data duplikat
-  List distinct() {
-
-    var result = [];
-
-    for (var item in this) {
-
-      if (!result.contains(item)) {
-        result.add(item);
-      }
-    }
-
-    return result;
-  }
-}
-
-void main() {
-
-  var numbers = [1, 2, 3, 4, 5, 6, 7];
-
-  print('Data chunk : ${numbers.chunk(3)}');
-
-  print(
-    'Data distinct : ${[1, 2, 2, 3, 3].distinct()}'
-  );
-}
-</code></pre>
-      </p>
+  List<T> distinct() => [...{...this}];
+}</code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/87d44db88abf4f0f3be564810236b5ce')"> JALANKAN KODE
-        </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/87d44db88abf4f0f3be564810236b5ce')">Jalankan Kode</button>
       </div>
     </div>
 
- <div class="card">
-      <h2>9.Unnamed Extensions/</h2>
-      <p> Unnamed Extensions (Ekstensi Tanpa Nama) adalah fitur dalam bahasa pemrograman Dart yang memungkinkan Anda menambahkan fungsionalitas baru ke tipe data yang sudah ada
-        (seperti String, int, atau class sendiri)
-        tanpa harus memberikan nama pada ekstensi tersebut
- <pre><code>
-// ==========================================
-// Nama  : Putra Dhafir Nashrullah
-// NIM   : 251410009
-// Kelas : SI2A
-// ==========================================
-extension on DateTime {
-
-  String get toYYYYMMDD {
-
-    return '$year-'
-           '${month.toString().padLeft(2, '0')}-'
-           '${day.toString().padLeft(2, '0')}';
-  }
-
-  DateTime get startOfDay {
-    return DateTime(year, month, day);
-  }
-}
-
-void main() {
-
-  var today = DateTime.now();
-
-  print('Format tanggal : ${today.toYYYYMMDD}');
-  print('Awal hari      : ${today.startOfDay}');
-}
-</code></pre>
-      </p>
+    <!-- Unnamed Extensions -->
+    <div class="card">
+      <h2>8. Unnamed Extensions (Tanpa Nama)</h2>
+      <p>Unnamed Extensions hanya terlihat di file yang sama, cocok untuk helper lokal tanpa konflik global.</p>
+      <pre><code>extension on DateTime {
+  String get toYYYYMMDD => '$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
+  DateTime get startOfDay => DateTime(year, month, day);
+}</code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/93d797b33b977d84d403db4b805fbc76')"> JALANKAN KODE
-        </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/93d797b33b977d84d403db4b805fbc76')">Jalankan Kode</button>
       </div>
     </div>
 
- <div class="card">
-      <h2>10.Konflik Nama Extension/</h2>
-      <p> Konflik nama terjadi ketika dua atau lebih ekstensi (baik yang bernama maupun tidak bernama)
-         memiliki nama method, getter,
-         atau operator yang sama untuk tipe yang sama, dan cakupannya (scope) saling tumpang tindih.
- <pre><code>
-// ==========================================
-// Nama  : Putra Dhafir Nashrullah
-// NIM   : 251410009
-// Kelas : SI2A
-// ==========================================
-// Extension pertama
-extension StringCaseExtensions on String {
-
-  String capitalize() {
-    return
-      "${this[0].toUpperCase()}${substring(1)}";
-  }
+    <!-- Konflik Nama Extension -->
+    <div class="card">
+      <h2>9. Konflik Nama Extension</h2>
+      <p>Konflik terjadi saat dua extension memiliki method dengan nama sama pada tipe yang sama — solusi: panggil ekstensi secara eksplisit.</p>
+      <pre><code>extension StringCaseExtensions on String {
+  String capitalize() => "${this[0].toUpperCase()}${substring(1)}";
 }
-
-// Extension kedua
 extension TextUtilsExtensions on String {
-
-  String capitalize() {
-    return
-      ">>> ${toUpperCase()} <<<";
-  }
+  String capitalize() => ">>> ${toUpperCase()} <<<";
 }
-
 void main() {
-
   var text = 'hello';
-
-  // Menggunakan extension pertama
-  print(
-    StringCaseExtensions(text)
-        .capitalize()
-  );
-
-  // Menggunakan extension kedua
-  print(
-    TextUtilsExtensions(text)
-        .capitalize()
-  );
-}
-</code></pre>
-      </p>
+  print(StringCaseExtensions(text).capitalize());
+  print(TextUtilsExtensions(text).capitalize());
+}</code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/5f14beffe12d5152034b35bd3c209cb4')"> JALANKAN KODE
-        </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/5f14beffe12d5152034b35bd3c209cb4')">Jalankan Kode</button>
       </div>
     </div>
 
- <div class="card">
-      <h2>11.Extension untuk Custom Classes/</h2>
-      <p> Extension adalah fitur di Dart yang memungkinkan Anda menambahkan fungsionalitas baru 
-        (method, getter, setter, operator) ke tipe data yang sudah ada (baik bawaan seperti String/int, maupun class custom) 
-        tanpa harus mengubah kode aslinya.
-
-
- <pre><code>
-// ==========================================
-// Nama  : Putra Dhafir Nashrullah
-// NIM   : 251410009
-// Kelas : SI2A
-// ==========================================
-class Product {
-
-  final String name;
-  final double price;
-
+    <!-- Extension untuk Custom Classes -->
+    <div class="card">
+      <h2>10. Extension untuk Custom Classes</h2>
+      <p>Extension bisa menambah fungsionalitas ke class buatan sendiri tanpa mengubah source asli, sangat powerful untuk codebase bersih.</p>
+      <pre><code>class Product {
+  final String name; final double price;
   Product(this.name, this.price);
 }
-
-// Extension format Rupiah
-extension DoubleRupiahFormatter on double {
-
-  String toRupiah() {
-
-    final intValue = toInt();
-
-    String numberString =
-        intValue.toString();
-
-    String formattedString = '';
-
-    int counter = 0;
-
-    for (int i =
-            numberString.length - 1;
-        i >= 0;
-        i--) {
-
-      formattedString =
-          numberString[i] +
-          formattedString;
-
-      counter++;
-
-      if (counter % 3 == 0 &&
-          i != 0) {
-
-        formattedString =
-            '.$formattedString';
-      }
-    }
-
-    return 'Rp$formattedString';
-  }
-}
-
-// Extension Product
 extension ProductExtensions on Product {
-
-  // Method diskon
-  Product withDiscount(
-      double percentage) {
-
-    var discountedPrice =
-        price *
-        (1 - percentage / 100);
-
-    return Product(
-      name,
-      discountedPrice,
-    );
-  }
-
-  // Getter informasi produk
-  String get displayInfo =>
-      '$name - ${price.toRupiah()}';
-
-  // Getter cek harga mahal
-  bool get isExpensive =>
-      price > 100000;
-}
-
-void main() {
-
-  var laptop =
-      Product('Laptop', 15000000);
-
-  var discounted =
-      laptop.withDiscount(10);
-
-  print("=== DATA LAPTOP ===");
-
-  print(
-    discounted.displayInfo
-  );
-
-  print(
-    "Laptop mahal? "
-    "${laptop.isExpensive}"
-  );
-
-  var keyboard =
-      Product('Keyboard', 75000);
-
-  print("\n=== DATA KEYBOARD ===");
-
-  print(
-    keyboard.displayInfo
-  );
-
-  print(
-    "Keyboard mahal? "
-    "${keyboard.isExpensive}"
-  );
-}
-</code></pre>
-      </p>
+  Product withDiscount(double percentage) => Product(name, price * (1 - percentage / 100));
+  String get displayInfo => '$name - Rp${price.toInt()}';
+  bool get isExpensive => price > 100000;
+}</code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/b1e3366ac6820170ad15be18a7e75c48')"> JALANKAN KODE
-        </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/b1e3366ac6820170ad15be18a7e75c48')">Jalankan Kode</button>
       </div>
     </div>
 
-     <div class="card">
-      <h2>12.Validator Extensions -PRAKTEK 2/</h2>
-      <p> Validator Extensions adalah penggunaan extension di Dart khusus untuk menambahkan method validasi ke tipe data tertentu 
-        (biasanya String, int, 
-        atau custom class) sehingga kode validasi menjadi lebih ekspresif, reusable, dan terorganisi
-
-
- <pre><code>
-// ==========================================
-// Nama  : Putra Dhafir Nashrullah
-// NIM   : 251410009
-// Kelas : SI2A
-// ==========================================
- Extension validator String
-extension StringValidators on String {
-
-  // Validasi email
-  bool get isEmail {
-
-    return RegExp(
-      r'^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$',
-    ).hasMatch(this);
-  }
-
-  // Validasi nomor HP
-  bool get isPhoneNumber {
-
-    return RegExp(
-      r'^[0-9]{10,13}$',
-    ).hasMatch(this);
-  }
-
-  // Validasi password kuat
-  bool get isStrongPassword {
-
-    return length >= 8 &&
-        contains(
-          RegExp(r'[A-Z]')
-        ) &&
-        contains(
-          RegExp(r'[a-z]')
-        ) &&
-        contains(
-          RegExp(r'[0-9]')
-        );
-  }
-
-  // Validasi URL
-  bool get isUrl {
-
-    try {
-
-      Uri.parse(this);
-
-      return true;
-
-    } catch (_) {
-
-      return false;
-    }
-  }
-}
-
-// Extension validator int
-extension IntValidators on int {
-
-  bool get isAdultAge =>
-      this >= 18;
-
-  bool get isPositive =>
-      this > 0;
-
-  bool get isEven =>
-      this % 2 == 0;
-
-  bool get isOdd =>
-      this % 2 != 0;
-}
-
-void main() {
-
-  var email =
-      'test@example.com';
-
-  var age = 25;
-
-  var password =
-      'Pass1234';
-
-  var phone =
-      '081234567890';
-
-  print("=== VALIDATOR DATA ===");
-
-  print(
-    "Email valid : "
-    "${email.isEmail}"
-  );
-
-  print(
-    "Nomor HP valid : "
-    "${phone.isPhoneNumber}"
-  );
-
-  print(
-    "Password kuat : "
-    "${password.isStrongPassword}"
-  );
-
-  print(
-    "Usia dewasa : "
-    "${age.isAdultAge}"
-  );
-
-  print(
-    "Bilangan genap : "
-    "${10.isEven}"
-  );
-}
-</code></pre>
-      </p>
+    <!-- Validator Extensions -->
+    <div class="card">
+      <h2>11. Validator Extensions (PRAKTEK 2)</h2>
+      <p>Validator extensions membuat validasi data menjadi ekspresif, reusable, dan terorganisir.</p>
+      <pre><code>extension StringValidators on String {
+  bool get isEmail => RegExp(r'^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(this);
+  bool get isPhoneNumber => RegExp(r'^[0-9]{10,13}$').hasMatch(this);
+  bool get isStrongPassword => length >= 8 && contains(RegExp(r'[A-Z]')) && contains(RegExp(r'[a-z]')) && contains(RegExp(r'[0-9]'));
+}</code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/0650e7c66f36f44c7b24f26985ca0b6f')"> JALANKAN KODE
-        </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/0650e7c66f36f44c7b24f26985ca0b6f')">Jalankan Kode</button>
       </div>
     </div>
 
-  <div class="card">
-      <h2>13.Konflik Nama Antar Extension - BONUS 1/</h2>
-      <p> Konflik nama antar extension terjadi ketika dua atau lebih extension 
-        (bisa keduanya bernama, atau satu bernama satu tidak) memiliki method, getter, atau operator 
-        dengan nama yang sama untuk tipe data yang sama, dan keduanya berada dalam cakupan (scope) yang sama.
-
-
-
- <pre><code>
-// ==========================================
-// Nama  : Putra Dhafir Nashrullah
-// NIM   : 251410009
-// Kelas : SI2A
-// ==========================================
-// Extension pertama
-extension StringNumber on String {
-
-  int toInt() {
-    return int.parse(this);
-  }
-}
-
-// Extension kedua
-extension StringDouble on String {
-
-  double toDouble() {
-    return double.parse(this);
-  }
-}
-
+    <!-- Konflik Nama Antar Extension (Bonus) -->
+    <div class="card">
+      <h2>12. Konflik Nama Antar Extension (BONUS)</h2>
+      <p>Cara terbaik mengatasi konflik adalah dengan memanggil extension secara eksplisit atau menggunakan hide/show saat import.</p>
+      <pre><code>extension StringNumber on String { int toInt() => int.parse(this); }
+extension StringDouble on String { double toDouble() => double.parse(this); }
 void main() {
-
   String angka = '123';
-
-  // Menggunakan extension int
-  print(
-    StringNumber(angka).toInt()
-  );
-
-  // Menggunakan extension double
-  print(
-    StringDouble(angka).toDouble()
-  );
-}
-</code></pre>
-      </p>
+  print(StringNumber(angka).toInt());
+  print(StringDouble(angka).toDouble());
+}</code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/fcdb5af13119f3050fffdab4e9d97941')"> JALANKAN KODE
-        </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/fcdb5af13119f3050fffdab4e9d97941')">Jalankan Kode</button>
       </div>
     </div>
 
-  <div class="card">
-      <h2>14.Prioritas Method Asli vs Extension (dan Nullable) - BONUS 2/</h2>
-      <p> Prioritas method adalah aturan di Dart yang menentukan method mana yang akan dipanggil ketika ada
-        nama method yang sama dari sumber yang berbeda (method asli class, extension, atau extension nullable).
-📌 Inti Pemahaman
-Prioritas	Sumber	Contoh Panggilan
-1 (Tertinggi)	Method asli class	"hello".length → punya String
-2	Extension (non-nullable)	"hello".isEmail → dari extension
-3 (Terendah)	Extension nullable	String? → text?.orEmpty
-🎯 Aturan Emas (Hanya 3 Hal yang Perlu Diingat)
-
-
- <pre><code>
-// ==========================================
-// Nama  : Putra Dhafir Nashrullah
-// NIM   : 251410009
-// Kelas : SI2A
-// ==========================================
-class Greeting {
-
-  String say() =>
-      'Hello from class';
-}
-
-// Extension
-extension GreetingExt on Greeting {
-
-  String sayExt() =>
-      'Hello from extension';
-}
-
+    <!-- Prioritas Method Asli vs Extension -->
+    <div class="card">
+      <h2>13. Prioritas Method Asli vs Extension (Nullable)</h2>
+      <p>Prioritas: Method asli class > Extension non-nullable > Extension nullable. Tipe variabel menentukan ekstensi mana yang digunakan.</p>
+      <pre><code>class Greeting { String say() => 'Hello from class'; }
+extension GreetingExt on Greeting { String sayExt() => 'Hello from extension'; }
 void main() {
-
   Greeting? obj = Greeting();
-
-  // Method asli class
-  print(obj?.say());
-
-  // Method extension
-  print(obj?.sayExt());
-}
-</code></pre>
-      </p>
+  print(obj?.say());    // method asli
+  print(obj?.sayExt()); // extension
+}</code></pre>
       <div class="run-btn-container">
-        <button class="run-btn" onclick="openModal('https://dartpad.dev/30d1031ddef7cf4ed1aa0a82593aa72b')"> JALANKAN KODE
-        </button>
+        <button class="run-btn" onclick="openModal('https://dartpad.dev/30d1031ddef7cf4ed1aa0a82593aa72b')">Jalankan Kode</button>
       </div>
     </div>
-    
- </div
-     <!-- SECTION 15:  -->
-<div class="section">
-    <h2> 15.KESIMPULAN </h2>
-    
-    <p><strong>✦ KESIMPULAN </strong></p>
-    <ul>
-        <li>Kesimpulan
-​Methods adalah perilaku bawaan asli yang dirancang dari dalam suatu
-objek dan memiliki akses penuh ke seluruh datanya, sedangkan
-Extension adalah cara instan untuk menambahkan fungsi baru ke objek tersebut dari luar
-tanpa harus membongkar atau mengubah kode aslinya.
-Secara sederhana, Method adalah fitur bawaan pabrik,
-sementara Extension adalah aksesoris tambahan yang dipasang kemudian untuk memperluas fungsinya.!</li>
-    </ul>
+
+    <!-- ========= KESIMPULAN (Desain Rapi & Mewah) ========= -->
+    <div class="conclusion-section">
+      <h2>✦ KESIMPULAN AKHIR</h2>
+      <div class="highlight-box">
+        <div class="highlight-text">📌 Method vs Extension: Inti Perbedaan</div>
+        <div class="insight-text">
+          <strong>Method</strong> adalah perilaku bawaan asli yang dirancang dari dalam suatu objek dan memiliki akses penuh ke seluruh datanya.<br><br>
+          <strong>Extension</strong> adalah cara instan untuk menambahkan fungsi baru ke objek tersebut dari luar, tanpa harus membongkar atau mengubah kode aslinya.
+        </div>
       </div>
+      <div class="highlight-box">
+        <div class="highlight-text">🎯 Analogi Sederhana</div>
+        <div class="insight-text">
+          Method adalah <strong>fitur bawaan pabrik</strong> — sudah melekat sejak awal.<br>
+          Extension adalah <strong>aksesoris tambahan</strong> yang dipasang kemudian untuk memperluas fungsinya tanpa mengubah produk inti.
+        </div>
+      </div>
+      <div class="highlight-box">
+        <div class="highlight-text">⚙️ Keunggulan Extension</div>
+        <div class="insight-text">
+          • <strong>Tidak mengganggu kode asli</strong> — aman untuk library/package.<br>
+          • <strong>Meningkatkan readability</strong> — kode jadi lebih ekspresif.<br>
+          • <strong>Dapat digunakan pada tipe nullable maupun generik</strong> — fleksibel.<br>
+          • <strong>Mencegah konflik</strong> — bisa dibuat lokal (unnamed) atau dipanggil eksplisit.
+        </div>
+      </div>
+      <div class="highlight-box">
+        <div class="highlight-text">📐 Aturan Prioritas (PENTING)</div>
+        <div class="insight-text">
+          1️⃣ Method Asli Class → selalu menang.<br>
+          2️⃣ Extension Non-Nullable → dipanggil jika tipe variabel non-nullable.<br>
+          3️⃣ Extension Nullable → dipanggil jika tipe variabel nullable (meski isinya tidak null).<br>
+          💡 <em>Gunakan panggilan eksplisit (NamaExtension(obj).method()) untuk menghindari ambiguitas.</em>
+        </div>
+      </div>
+    </div>
 
-<!-- SECTION 16:  -->
-<div class="section">
-    <h2> 16.PENUTUP </h2>
-    
-    <p><strong>✦ PENUTUP </strong></p>
-    <ul>
-        <li>Penutup
-​Sebagai penutup, perbedaan mendasar antara keduanya terletak pada asal dan hak aksesnya
-: Methods adalah fungsi internal bawaan objek, sedangkan Extension adalah fitur eksternal penambah kemampuan.
-Kombinasi yang tepat dalam penggunaan keduanya akan sangat membantu programmer dalam menulis kode yang lebih rapi dan efektif. 
-Semoga penjelasan ini dapat memberikan pemahaman yang jelas mengenai penerapan Methods dan Extension dalam pengembangan perangkat lunak.!</li>
-    </ul>
+    <!-- ========= PENUTUP (Desain Rapi & Inspiratif) ========= -->
+    <div class="closing-section">
+      <h2>✦ PENUTUP</h2>
+      <div class="highlight-box">
+        <div class="insight-text" style="font-size: 17px;">
+          Perbedaan mendasar antara <strong>Methods</strong> dan <strong>Extensions</strong> terletak pada <strong>asal dan hak aksesnya</strong>:
+          Methods adalah fungsi internal bawaan objek, sedangkan Extension adalah fitur eksternal penambah kemampuan.
+        </div>
+      </div>
+      <div class="highlight-box">
+        <div class="insight-text">
+          🧩 <strong>Kombinasi yang tepat</strong> dalam penggunaan keduanya akan sangat membantu programmer dalam menulis kode yang lebih <strong>rapi, efektif, dan mudah dipelihara</strong>.
+          Extension methods membuka jalan menuju kode yang lebih <strong>deklaratif, reusable</strong> dan sesuai dengan prinsip <strong>Open/Closed</strong>.
+        </div>
+      </div>
+      <div class="closing-quote">
+        💎 "Semoga penjelasan ini memberikan pemahaman yang jelas mengenai penerapan Methods dan Extension dalam pengembangan perangkat lunak, serta mendorong eksplorasi lebih dalam terhadap fitur-fitur modern Dart." 💎
+      </div>
+    </div>
 
-  
   </div>
 
-  <!-- --- MODAL STRUCTURE --- -->
+  <!-- MODAL POPUP -->
   <div id="codeModal" class="modal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeModal()">&times;</span>
@@ -1120,45 +636,25 @@ Semoga penjelasan ini dapat memberikan pemahaman yang jelas mengenai penerapan M
   </div>
 
   <footer>
-    © 2026 - PUTRA DHAFIR NASHRULLAH
+    © 2026 - PUTRA DHAFIR NASHRULLAH | Extension & Methods — Dart OOP
   </footer>
 
   <script>
-    // FUNGSI MODAL
     function openModal(url) {
       document.getElementById("codeModal").style.display = "block";
       document.getElementById("dartFrame").src = url;
-      document.body.style.overflow = "hidden"; // Disable scroll background
+      document.body.style.overflow = "hidden";
     }
-
     function closeModal() {
       document.getElementById("codeModal").style.display = "none";
       document.getElementById("dartFrame").src = "";
       document.body.style.overflow = "auto";
     }
-
-    // Close modal if user clicks outside of it
     window.onclick = function (event) {
       if (event.target == document.getElementById("codeModal")) {
         closeModal();
       }
     }
-
-    // FUNGSI KOMENTAR
-    document.getElementById("commentForm").addEventListener("submit", function (event) {
-      event.preventDefault();
-      var name = document.getElementById("name").value;
-      var comment = document.getElementById("comment").value;
-
-      var commentBox = document.createElement("div");
-      commentBox.classList.add("comment-box");
-      commentBox.innerHTML = "<strong>" + name + "</strong><p>" + comment + "</p>";
-
-      document.getElementById("comment-list").prepend(commentBox);
-
-      document.getElementById("name").value = "";
-      document.getElementById("comment").value = "";
-    });
   </script>
 </body>
 
